@@ -76,11 +76,11 @@ const Navbar = () => {
       { name: 'Our Vision', id: 'vision' }
     ],
     'Businesses': [
-      'Real Estate',
-      'Entertainment',
-      'Finance',
-      'Retail'
-    ]
+    { name: 'Real Estate', path: '/real-estate' },
+    { name: 'Entertainment', path: '/entertainment' },
+    { name: 'Finance', path: '/finance' },
+    { name: 'Retail', path: '/retail' }
+  ]
   };
 
   return (
@@ -94,7 +94,9 @@ const Navbar = () => {
 
             <div className="flex-shrink-0 p-3 flex items-center h-full">
               <div className="text-white text-xl font-bold">
-                <Image src="/logo.png" alt="Company Logo" width={80} height={80} className="p-4" />
+                <Link href="/">
+                  <Image src="/logo.png" alt="Company Logo" width={80} height={80} className="p-4" />
+                </Link>
               </div>
             </div>
 
@@ -118,7 +120,7 @@ const Navbar = () => {
                 </button>
 
                 {/* About Us Dropdown Menu */}
-                <div className={`absolute top-full left-0 mt-2 w-64 bg-gray-900/90 backdrop-blur-md rounded-md shadow-lg transition-all duration-300 ${activeDropdown === 'About Us'
+                <div className={`absolute top-full left-0 mt-2 w-64 bg-transparent backdrop-blur-md rounded-md shadow-lg transition-all duration-300 ${activeDropdown === 'About Us'
                   ? 'opacity-100 visible transform translate-y-0'
                   : 'opacity-0 invisible transform translate-y-2'
                   }`}>
@@ -159,10 +161,10 @@ const Navbar = () => {
                     {dropdownItems['Businesses'].map((item, index) => (
                       <Link
                         key={index}
-                        href="#"
+                        href={item.path}
                         className="block px-4 py-2 text-white hover:bg-gray-800/50 transition-colors duration-200"
                       >
-                        {item}
+                        {item.name}
                       </Link>
                     ))}
                   </div>
@@ -277,10 +279,10 @@ const Navbar = () => {
                   {dropdownItems['Businesses'].map((item, index) => (
                     <Link
                       key={index}
-                      href="#"
+                      href={item.path}
                       className="block text-gray-300 text-lg hover:text-white transition-colors duration-200"
                     >
-                      {item}
+                      {item.name}
                     </Link>
                   ))}
                 </div>

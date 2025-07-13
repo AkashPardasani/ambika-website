@@ -2,55 +2,39 @@
 import React, { useState } from 'react';
 
 const BusinessShowcase = () => {
-  // Data for each business section
+  // Data for each business section - matching navbar dropdown items
   const businessData = [
     {
-      id: 'energy',
-      title: 'ENERGY',
-      heading: 'New Energy',
-      description: 'We care about the collective future of humanity. Reliance is committed to achieving an ambitious net-zero carbon target by 2035. To achieve this, we are building the most comprehensive ecosystem for New Energy and New Materials in India to secure the promise of a sustainable future for generations to come. Our New Energy business will be an optimal mix of reliable, clean and affordable energy solutions with hydrogen, wind, solar, fuel cells, and batteries. We are committed to helping India lead in the Green New Energy future and are bridging the Green Energy divide in India and the world.',
-      backgroundImage: 'https://images.unsplash.com/photo-1473341304170-971dccb5ac1e?q=80&w=2070',
-      readMoreLink: '#'
+      id: 'real-estate',
+      title: 'REAL ESTATE',
+      heading: 'Real Estate Excellence',
+      description: 'Discover premium real estate opportunities with our comprehensive portfolio of residential and commercial properties. We specialize in luxury developments, strategic investments, and innovative architectural solutions that redefine modern living. Our commitment to quality, sustainability, and customer satisfaction has established us as a trusted name in the real estate industry. From sprawling residential complexes to cutting-edge commercial spaces, we create environments that inspire and endure.',
+      backgroundImage: 'https://images.unsplash.com/photo-1560518883-ce09059eeffa?q=80&w=2070',
+      readMoreLink: '/real-estate'
     },
     {
-      id: 'petrochemicals',
-      title: 'PETROCHEMICALS',
-      heading: 'Petrochemicals',
-      description: 'Our petrochemicals business is one of the most integrated complexes globally, with world-scale manufacturing facilities. We produce a wide range of petrochemical products and are among the top producers of several polymers and chemicals worldwide. Our focus on operational excellence, energy efficiency, and sustainable practices has made us a leader in the petrochemicals industry. We continue to invest in advanced technologies and capacity expansions to meet the growing demand for petrochemical products.',
-      backgroundImage: 'https://images.unsplash.com/photo-1581091226033-d5c48150dbaa?q=80&w=2070',
-      readMoreLink: '#'
+      id: 'entertainment',
+      title: 'ENTERTAINMENT',
+      heading: 'Entertainment & Media',
+      description: 'Immerse yourself in a world of captivating entertainment experiences. Our entertainment division creates and distributes premium content across multiple platforms, from blockbuster productions to engaging digital experiences. We are at the forefront of the entertainment revolution, leveraging cutting-edge technology to deliver unforgettable experiences. Our state-of-the-art facilities and creative partnerships ensure we bring world-class entertainment to audiences everywhere.',
+      backgroundImage: 'https://images.unsplash.com/photo-1489599511686-c2d7b3b5c4a5?q=80&w=2070',
+      readMoreLink: '/entertainment'
+    },
+    {
+      id: 'finance',
+      title: 'FINANCE',
+      heading: 'Financial Services',
+      description: 'Empowering your financial future with comprehensive banking and investment solutions. Our finance division offers a complete suite of services including personal banking, corporate finance, investment management, and wealth advisory services. We combine traditional banking expertise with innovative fintech solutions to provide seamless, secure, and personalized financial experiences. Our commitment to financial inclusion and digital transformation makes banking accessible to everyone.',
+      backgroundImage: 'https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3?q=80&w=2070',
+      readMoreLink: '/finance'
     },
     {
       id: 'retail',
       title: 'RETAIL',
-      heading: 'Retail',
-      description: 'Our retail business has revolutionized the shopping experience for millions of Indians. Through our extensive network of stores and digital platforms, we offer a wide range of products from groceries to fashion, electronics to home essentials. We are committed to providing quality products at affordable prices while supporting local manufacturers and farmers. Our omnichannel approach ensures customers can shop seamlessly across physical stores and digital platforms.',
+      heading: 'Retail Revolution',
+      description: 'Transforming the retail landscape with innovative shopping experiences and premium products. Our retail network spans across multiple categories, offering everything from fashion and electronics to home essentials and groceries. We are committed to providing quality products at competitive prices while supporting local manufacturers and sustainable practices. Our omnichannel approach ensures customers enjoy seamless shopping experiences across physical stores and digital platforms.',
       backgroundImage: 'https://images.unsplash.com/photo-1472851294608-062f824d29cc?q=80&w=2070',
-      readMoreLink: '#'
-    },
-    {
-      id: 'digital-services',
-      title: 'DIGITAL SERVICES - JIO',
-      heading: 'Digital Services - Jio',
-      description: 'Jio has transformed India\'s digital landscape by making high-speed internet accessible and affordable to millions. Our comprehensive digital ecosystem includes mobile and broadband services, digital content, cloud computing, and innovative solutions for businesses and individuals. We continue to invest in cutting-edge technologies like 5G, AI, and IoT to build a digitally empowered society and drive India\'s digital revolution forward.',
-      backgroundImage: 'https://images.unsplash.com/photo-1451187580459-43490279c0fa?q=80&w=2072',
-      readMoreLink: '#'
-    },
-    {
-      id: 'new-energy',
-      title: 'NEW ENERGY',
-      heading: 'Sustainable Future',
-      description: 'Our New Energy initiative represents our commitment to a sustainable future. We are developing an integrated renewable energy ecosystem encompassing solar photovoltaic, energy storage, hydrogen, and fuel cells. This comprehensive approach will enable us to offer end-to-end solutions for clean energy generation, storage, and distribution. Our ambitious plans include building giga factories for solar modules, batteries, and electrolyzers to support India\'s energy transition.',
-      backgroundImage: 'https://images.unsplash.com/photo-1509391366360-2e959784a276?q=80&w=2072',
-      readMoreLink: '#'
-    },
-    {
-      id: 'media-entertainment',
-      title: 'MEDIA & ENTERTAINMENT',
-      heading: 'Media & Entertainment',
-      description: 'Our media and entertainment vertical creates and distributes premium content across multiple platforms. From blockbuster movies to engaging digital content, live sports to news, we cater to diverse audience preferences. Our state-of-the-art production facilities and partnerships with global content creators ensure we deliver world-class entertainment experiences. We are at the forefront of the digital content revolution, leveraging technology to reach audiences across India and beyond.',
-      backgroundImage: 'https://images.unsplash.com/photo-1603190287605-e6ade32fa852?q=80&w=2070',
-      readMoreLink: '#'
+      readMoreLink: '/retail'
     }
   ];
 
@@ -105,7 +89,7 @@ const BusinessShowcase = () => {
 
             <a 
               href={currentData.readMoreLink}
-              className="inline-flex items-center text-white text-sm font-medium group hover:text-yellow-400 transition-colors duration-300"
+              className="inline-flex items-center text-white text-sm font-medium group hover:text-yellow-400 transition-colors duration-300 bg-red-600 hover:bg-red-700 px-6 py-3 rounded-md"
             >
               <span className="mr-2">Read more</span>
               <svg 

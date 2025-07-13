@@ -1,9 +1,9 @@
 import React from 'react'
-import FinancePage from '../components/finance';
+import RetailPage from '../components/retail'
 const page = () => {
   return (
     <div>
-      <FinancePage />
+      <RetailPage />
     </div>
   )
 }

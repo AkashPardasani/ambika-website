@@ -1,9 +1,10 @@
 "use client";
 import { useState, useEffect } from 'react';
 import Image from 'next/image';
+import { useRouter } from 'next/navigation';
 const HeroSection = () => {
     const [currentImage, setCurrentImage] = useState(0);
-
+    const router = useRouter();
     // High-quality business/growth themed images
     const images = [
         'https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80',
@@ -56,7 +57,7 @@ const HeroSection = () => {
 
                 {/* Buttons */}
                 <div className="flex gap-6 mt-4">
-                    <button className="group relative px-8 py-3 border-2 border-white text-white font-semibold rounded-3xl text-lg tracking-wide transition-all duration-300 hover:bg-white hover:bg-opacity-90 hover:text-black">
+                    <button className="group relative px-8 py-3 border-2 border-white text-white font-semibold rounded-3xl text-lg tracking-wide transition-all duration-300 hover:bg-white hover:bg-opacity-90 hover:text-black" onClick={() => router.push('/about')}>
                         <span className="relative z-10">About Us</span>
                     </button>
                     <button className="group relative px-8 py-3 border-2 border-white text-white font-semibold rounded-3xl text-lg tracking-wide transition-all duration-300 hover:bg-white hover:bg-opacity-90 hover:text-black">
