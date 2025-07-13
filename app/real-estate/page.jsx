@@ -12,7 +12,7 @@ const RealEstatePage = () => {
   useEffect(() => {
     const fetchProperties = async () => {
       try {
-        const response = await fetch('http://localhost:1337/api/real-estate2s');
+        const response = await fetch(`${process.env.NEXT_PUBLIC_STRAPI_URI}/api/real-estate2s`);
         if (!response.ok) {
           throw new Error('Failed to fetch properties');
         }
@@ -30,7 +30,7 @@ const RealEstatePage = () => {
 
   const getImageUrl = (image) => {
     if (image?.url) {
-      return image.url.startsWith('http') ? image.url : `http://localhost:1337${image.url}`;
+      return image.url.startsWith('http') ? image.url : `${process.env.NEXT_PUBLIC_STRAPI_URI}${image.url}`;
     }
     return '/placeholder-property.jpg';
   };

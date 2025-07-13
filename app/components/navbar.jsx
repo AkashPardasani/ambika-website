@@ -3,13 +3,14 @@ import { useState, useEffect } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
+import { useRouter } from 'next/navigation';
 const Navbar = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [activeDropdown, setActiveDropdown] = useState(null);
   const [mobileAccordion, setMobileAccordion] = useState({});
   const pathname = usePathname();
-
+  const router = useRouter();
   const handleAboutLinkClick = (e, targetId) => {
     // If we are already on the about page
     if (pathname === '/about') {
@@ -61,6 +62,9 @@ const Navbar = () => {
   const handleDropdownLeave = () => {
     setActiveDropdown(null);
   };
+  const handleMobileLinkclick = ()=>{
+    setIsMobileMenuOpen(false);
+  }
 
   const toggleMobileAccordion = (section) => {
     setMobileAccordion(prev => ({
@@ -238,7 +242,7 @@ const Navbar = () => {
               {/* About Us Accordion */}
               <div>
                 <button
-                  onClick={() => toggleMobileAccordion('About Us')}
+                  onClick={() => {toggleMobileAccordion('About Us');router.push('/about'); handleMobileLinkclick(); }}
                   className="flex items-center justify-between w-full text-white text-xl font-medium hover:text-gray-300 transition-colors duration-200"
                 >
                   About Us
@@ -253,7 +257,7 @@ const Navbar = () => {
                     <Link
                       key={index}
                       href={`/about#${item.id}`}
-                      onClick={(e) => handleAboutLinkClick(e, item.id)}
+                      onClick={(e) => {handleAboutLinkClick(e, item.id); handleMobileLinkclick();}}
                       className="block w-full text-left text-gray-300 text-lg hover:text-white transition-colors duration-200"
                     >
                       {item.name}
@@ -265,7 +269,7 @@ const Navbar = () => {
               {/* Businesses Accordion */}
               <div>
                 <button
-                  onClick={() => toggleMobileAccordion('Businesses')}
+                  onClick={() => {toggleMobileAccordion('Businesses'); handleMobileLinkclick();}}
                   className="flex items-center justify-between w-full text-white text-xl font-medium hover:text-gray-300 transition-colors duration-200"
                 >
                   Businesses
@@ -280,6 +284,7 @@ const Navbar = () => {
                     <Link
                       key={index}
                       href={item.path}
+                      onClick={() => handleMobileLinkclick()}
                       className="block text-gray-300 text-lg hover:text-white transition-colors duration-200"
                     >
                       {item.name}

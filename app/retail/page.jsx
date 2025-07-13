@@ -2,7 +2,7 @@ import React from 'react'
 import RetailPage from '../components/retail'
 const page = () => {
   return (
-    <div>
+    <div className='overflow-hidden'>
       <RetailPage />
     </div>
   )

@@ -38,7 +38,7 @@ const RetailPage = () => {
                 Our story began with <strong>Ambika Paints and Hardware Stores</strong> in 1998—a small retail outlet 
                 that became synonymous with reliability and quality in Bhopal.
               </p>
-              <div className="flex flex-col sm:flex-row gap-4">
+              {/* <div className="flex flex-col sm:flex-row gap-4">
                 <button className="bg-yellow-400 hover:bg-yellow-300 text-gray-800 px-8 py-4 rounded-full font-semibold transition-all duration-300 shadow-lg hover:shadow-xl flex items-center gap-2">
                   <ShoppingBag className="w-5 h-5" />
                   Explore Products
@@ -47,26 +47,26 @@ const RetailPage = () => {
                   <MapPin className="w-5 h-5" />
                   Visit Store
                 </button>
-              </div>
+              </div> */}
             </div>
             <div className="relative">
               <div className="grid grid-cols-2 gap-4">
-                <div className="bg-white/10 backdrop-blur-sm rounded-3xl p-6 transform rotate-3 hover:rotate-0 transition-transform duration-300">
+                <div className="bg-white/10 backdrop-blur-sm rounded-3xl p-6 transform rotate-0 hover:rotate-0 transition-transform duration-300">
                   <Palette className="w-12 h-12 text-yellow-400 mb-4" />
                   <h3 className="text-lg font-bold mb-2">Paints & Colors</h3>
                   <p className="text-sm opacity-80">Premium quality paints for every surface</p>
                 </div>
-                <div className="bg-white/10 backdrop-blur-sm rounded-3xl p-6 transform -rotate-3 hover:rotate-0 transition-transform duration-300 mt-8">
+                <div className="bg-white/10 backdrop-blur-sm rounded-3xl p-6 transform -rotate-0 hover:rotate-0 transition-transform duration-300 mt-8">
                   <Hammer className="w-12 h-12 text-yellow-400 mb-4" />
                   <h3 className="text-lg font-bold mb-2">Hardware Tools</h3>
                   <p className="text-sm opacity-80">Professional grade construction tools</p>
                 </div>
-                <div className="bg-white/10 backdrop-blur-sm rounded-3xl p-6 transform rotate-2 hover:rotate-0 transition-transform duration-300">
+                <div className="bg-white/10 backdrop-blur-sm rounded-3xl p-6 transform rotate-0 hover:rotate-0 transition-transform duration-300">
                   <Home className="w-12 h-12 text-yellow-400 mb-4" />
                   <h3 className="text-lg font-bold mb-2">Home Solutions</h3>
                   <p className="text-sm opacity-80">Complete interior finishing materials</p>
                 </div>
-                <div className="bg-white/10 backdrop-blur-sm rounded-3xl p-6 transform -rotate-2 hover:rotate-0 transition-transform duration-300 mt-8">
+                <div className="bg-white/10 backdrop-blur-sm rounded-3xl p-6 transform -rotate-0 hover:rotate-0 transition-transform duration-300 mt-8">
                   <Building2 className="w-12 h-12 text-yellow-400 mb-4" />
                   <h3 className="text-lg font-bold mb-2">Construction</h3>
                   <p className="text-sm opacity-80">Building materials for every project</p>
