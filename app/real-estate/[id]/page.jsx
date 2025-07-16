@@ -223,6 +223,23 @@ const PropertyDetailPage = () => {
             {item.short_text}
           </motion.p>
         )}
+        {item.iframe && (
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6, delay: 0.6 }}
+          className="mt-8"
+        >
+          <iframe
+            src={item.iframe}  // You'll update this src later with the correct embed URL
+            className="w-full h-64 md:h-96 rounded-xl shadow-lg"
+            frameBorder="0"
+            allowFullScreen
+            loading="lazy"
+            title="Location Map"
+          />
+        </motion.div>
+      )}
       </div>
     ));
   };

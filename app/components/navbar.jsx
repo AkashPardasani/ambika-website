@@ -175,7 +175,7 @@ const Navbar = () => {
                 </div>
               </div>
 
-              <Link href="#" className={`${isScrolled ? 'text-black' : 'text-white'} hover:text-gray-300 transition-colors duration-200`}>
+              <Link href="/social-responsibility" className={`${isScrolled ? 'text-black' : 'text-white'} hover:text-gray-300 transition-colors duration-200`}>
                 Social Responsibility
               </Link>
               <Link href="#" className={`${isScrolled ? 'text-black' : 'text-white'} hover:text-gray-300 transition-colors duration-200`}>

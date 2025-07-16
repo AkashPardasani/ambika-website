@@ -202,49 +202,55 @@ export default function AboutUsPage() {
       </section>
 
        {/* Ventures Section */}
-      <section className="py-12 sm:py-16 lg:py-20 bg-gradient-to-br from-gray-800 to-gray-900">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-12 sm:mb-16">
-            <div className="inline-flex items-center gap-2 bg-white/10 backdrop-blur-sm px-3 sm:px-4 py-2 rounded-full text-xs sm:text-sm font-medium mb-6 sm:mb-8 text-white">
-              <span>Our Portfolio</span>
+     <section className="py-16 sm:py-20 lg:py-24 bg-gray-900 text-white">
+  <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    
+    {/* Section Header */}
+    <div className="text-center mb-12 sm:mb-16 lg:mb-20">
+      <div className="inline-flex items-center gap-2 bg-white/10 backdrop-blur-sm px-4 py-2 rounded-full text-sm font-medium mb-6 sm:mb-8">
+        <span>Our Portfolio</span>
+      </div>
+      <h2 className="text-4xl sm:text-5xl lg:text-6xl font-bold tracking-tight mb-4">
+        Our <span className="text-yellow-400">Ventures</span>
+      </h2>
+      <p className="text-lg sm:text-xl text-gray-400 max-w-3xl mx-auto">
+        A diverse portfolio of businesses united by a shared passion for innovation and excellence.
+      </p>
+    </div>
+    
+    {/* Responsive Grid Layout for Ventures */}
+    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 md:gap-8 lg:gap-12 xl:gap-16">
+      {ventures.map((venture, index) => (
+        <motion.div
+          key={index}
+          initial={{ opacity: 0, y: 50 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6, delay: index * 0.15, ease: "easeOut" }}
+          viewport={{ once: true }}
+          className="flex justify-center"
+        >
+          {/* PinContainer for the 3D hover effect */}
+          <PinContainer title={venture.title} href={venture.link}>
+            <div className="flex flex-col w-full max-w-xs min-h-[16rem] sm:min-h-[20rem] md:min-h-[22rem] h-auto p-4 sm:p-6 tracking-tight text-slate-100/90">
+              {/* Venture Title */}
+              <h3 className="!pb-2 !m-0 font-bold text-lg sm:text-xl text-white">
+                {venture.title}
+              </h3>
+              {/* Venture Description */}
+              <div className="text-sm sm:text-base !m-0 !p-0 font-normal">
+                <span className="text-gray-300">
+                  {venture.description}
+                </span>
+              </div>
+              {/* Decorative Gradient Element */}
+              <div className="flex flex-1 w-full rounded-lg mt-4 bg-gradient-to-br from-yellow-400 via-orange-500 to-red-600" />
             </div>
-            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-white mb-4 sm:mb-6">
-              Our <span className="text-yellow-400">Ventures</span>
-            </h2>
-            <p className="text-base sm:text-lg lg:text-xl text-gray-300 max-w-3xl mx-auto px-4">
-              Diverse businesses united by shared values of integrity, empathy, and excellence.
-            </p>
-          </div>
-          
-          {/* Grid Layout for Ventures */}
-          <div className="flex flex-wrap items-center justify-center gap-6 sm:gap-8">
-            {ventures.map((venture, index) => (
-              <motion.div
-                key={index}
-                initial={{ opacity: 0, y: 50, scale: 0.8 }}
-                whileInView={{ opacity: 1, y: 0, scale: 1 }}
-                transition={{ duration: 0.5, delay: index * 0.2 }}
-                viewport={{ once: true }}
-                className="flex-shrink-0"
-              >
-                <PinContainer title={venture.title} href={venture.link}>
-                  <div className="flex basis-full flex-col p-4 sm:p-6 tracking-tight text-slate-100/50 w-[280px] sm:w-[320px] h-[280px] sm:h-[320px]">
-                    <h3 className="max-w-xs !pb-2 !m-0 font-bold text-base sm:text-lg text-white">
-                      {venture.title}
-                    </h3>
-                    <div className="text-sm sm:text-base !m-0 !p-0 font-normal">
-                      <span className="text-gray-300">
-                        {venture.description}
-                      </span>
-                    </div>
-                    <div className="flex flex-1 w-full rounded-lg mt-4 bg-gradient-to-br from-red-600 via-yellow-400 to-red-700" />
-                  </div>
-                </PinContainer>
-              </motion.div>
-            ))}
-          </div>
-        </div>
-      </section>
+          </PinContainer>
+        </motion.div>
+      ))}
+    </div>
+  </div>
+</section>
 
       {/* CTA Section */}
       <section className="bg-gradient-to-r from-red-600 to-red-700 text-white py-20">

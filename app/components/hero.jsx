@@ -22,7 +22,7 @@ const HeroSection = () => {
     }, [images.length]);
 
     return (
-        <div className="relative w-screen h-screen overflow-hidden">
+        <div className="relative w-full min-h-screen overflow-hidden">
             {/* Image Carousel */}
             {images.map((image, index) => (
                 <div
@@ -39,15 +39,13 @@ const HeroSection = () => {
                         priority
                         loading="eager"
                     />
-                    {/* Dark overlay for better text readability */}
-                    {/* <div className="absolute inset-0 bg-black bg-opacity-30"></div> */}
                 </div>
             ))}
 
             {/* Content Overlay */}
-            <div className="absolute inset-0 flex flex-col items-start justify-center text-white z-10 pl-[20vw]">
+            <div className="absolute inset-0 flex flex-col justify-center text-white z-10 px-4 md:px-12 lg:pl-[12vw] lg:pr-0 lg:items-start items-center">
                 {/* Main Heading */}
-                <h1 className="text-6xl md:text-7xl lg:text-8xl font-bold text-left mb-8 tracking-tight" style={{ textShadow: '2px 2px 4px rgba(0,0,0,0.7), 0 0 20px rgba(0,0,0,0.3)' }}>
+                <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-bold text-left lg:text-left text-center mb-8 tracking-medium" style={{ textShadow: '2px 2px 4px rgba(0,0,0,0.7), 0 0 20px rgba(0,0,0,0.3)' }}>
                     <span style={{ position: 'relative', display: 'inline-block' }}>
                         Growth
                         <hr className="absolute bottom-[-10px] left-0 right-0 w-full h-1 bg-gradient-to-r from-yellow-400 via-yellow-500 to-yellow-600 border-0 rounded-full" />
@@ -56,11 +54,11 @@ const HeroSection = () => {
                 </h1>
 
                 {/* Buttons */}
-                <div className="flex gap-6 mt-4">
-                    <button className="group relative px-8 py-3 border-2 border-white text-white font-semibold rounded-3xl text-lg tracking-wide transition-all duration-300 hover:bg-white hover:bg-opacity-90 hover:text-black" onClick={() => router.push('/about')}>
+                <div className="flex flex-col sm:flex-row gap-4 sm:gap-6 mt-4 w-full max-w-xs sm:max-w-none lg:justify-start justify-center items-center lg:items-start">
+                    <button className="group relative w-full sm:w-auto px-8 py-3 border-2 border-white text-white font-semibold rounded-3xl text-base sm:text-lg tracking-wide transition-all duration-300 hover:bg-white hover:bg-opacity-90 hover:text-black cursor-pointer" onClick={() => router.push('/about')}>
                         <span className="relative z-10">About Us</span>
                     </button>
-                    <button className="group relative px-8 py-3 border-2 border-white text-white font-semibold rounded-3xl text-lg tracking-wide transition-all duration-300 hover:bg-white hover:bg-opacity-90 hover:text-black">
+                    <button className="group relative w-full sm:w-auto px-8 py-3 border-2 border-white text-white font-semibold cursor-pointer rounded-3xl text-base sm:text-lg tracking-wide transition-all duration-300 hover:bg-white hover:bg-opacity-90 hover:text-black">
                         <span className="relative z-10">Our History</span>
                     </button>
                 </div>

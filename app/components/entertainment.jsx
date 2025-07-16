@@ -1,7 +1,7 @@
 "use client"
 import React from 'react';
 import { Play, Film, Users, Mail, MapPin, Star, ArrowRight } from 'lucide-react';
-
+import YouTube from 'react-youtube';
 const EntertainmentPage = () => {
   return (
     <div className="min-h-screen bg-gradient-to-br from-gray-50 to-gray-100">
@@ -10,14 +10,14 @@ const EntertainmentPage = () => {
         <div className="absolute inset-0 bg-black/20"></div>
         <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-24 lg:py-32">
           <div className="text-center">
-            <h1 className="text-4xl md:text-6xl font-bold mb-6 leading-tight">
+            <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold mb-4 md:mb-6 leading-tight">
               Entertainment
             </h1>
-            <p className="text-xl md:text-2xl mb-8 font-light italic opacity-90">
+            <p className="text-lg sm:text-xl md:text-2xl mb-6 md:mb-8 font-light italic opacity-90">
               Not just entertainment - a voice that resonates
             </p>
-            <div className="w-24 h-1 bg-yellow-400 mx-auto mb-8"></div>
-            <p className="text-lg md:text-xl max-w-4xl mx-auto leading-relaxed">
+            <div className="w-16 sm:w-20 md:w-24 h-1 bg-yellow-400 mx-auto mb-6 md:mb-8"></div>
+            <p className="text-base sm:text-lg md:text-xl max-w-4xl mx-auto leading-relaxed px-4 sm:px-0">
               At Ambika, storytelling isn't just a venture—it's a calling. Through our banner Lakshya Productions, 
               we entered the world of film and digital content not to chase trends, but to create something real, raw, and resonant.
             </p>
@@ -32,10 +32,10 @@ const EntertainmentPage = () => {
         <div className="mb-20">
           <div className="grid lg:grid-cols-2 gap-12 items-center">
             <div>
-              <h2 className="text-3xl md:text-4xl font-bold text-gray-800 mb-6">
+              <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-gray-800 mb-4 md:mb-6">
                 Our Story
               </h2>
-              <p className="text-lg text-gray-600 leading-relaxed mb-6">
+              <p className="text-base sm:text-lg text-gray-600 leading-relaxed mb-4 md:mb-6">
                 We believe stories have the power to heal, provoke thought, spark change—and above all, to connect.
               </p>
               <p className="text-gray-600 leading-relaxed mb-6">
@@ -66,6 +66,27 @@ const EntertainmentPage = () => {
                   </div>
                 </div>
               </div>
+            </div>
+          </div>
+        </div>
+
+        {/* YouTube Video Section */}
+        <div className="mb-20">
+          <div className="relative w-full" style={{ paddingBottom: '56.25%' /* 16:9 aspect ratio */ }}>
+            <div className="absolute inset-0">
+              <YouTube 
+                videoId="UMIjgfzlaW0" 
+                opts={{ 
+                  width: '100%', 
+                  height: '100%',
+                  playerVars: {
+                    autoplay: 0,
+                    modestbranding: 1,
+                    rel: 0
+                  }
+                }} 
+                className="w-full h-full rounded-2xl overflow-hidden shadow-xl"
+              />
             </div>
           </div>
         </div>
