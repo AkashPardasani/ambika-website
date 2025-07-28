@@ -219,7 +219,7 @@ export default function AboutUsPage() {
     </div>
     
     {/* Responsive Grid Layout for Ventures */}
-    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 md:gap-8 lg:gap-12 xl:gap-16">
+    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
       {ventures.map((venture, index) => (
         <motion.div
           key={index}
@@ -227,11 +227,10 @@ export default function AboutUsPage() {
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: index * 0.15, ease: "easeOut" }}
           viewport={{ once: true }}
-          className="flex justify-center"
         >
           {/* PinContainer for the 3D hover effect */}
           <PinContainer title={venture.title} href={venture.link}>
-            <div className="flex flex-col w-full max-w-xs min-h-[16rem] sm:min-h-[20rem] md:min-h-[22rem] h-auto p-4 sm:p-6 tracking-tight text-slate-100/90">
+            <div className="flex flex-col w-full h-full p-4 sm:p-6 tracking-tight text-slate-100/90 min-h-[16rem] sm:min-h-[20rem] md:min-h-[22rem]">
               {/* Venture Title */}
               <h3 className="!pb-2 !m-0 font-bold text-lg sm:text-xl text-white">
                 {venture.title}

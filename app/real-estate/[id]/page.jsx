@@ -9,6 +9,7 @@ import { Navigation, Pagination, Autoplay } from 'swiper/modules';
 import 'swiper/css';
 import 'swiper/css/navigation';
 import 'swiper/css/pagination';
+import axios from 'axios';
 
 const PropertyDetailPage = () => {
   const [property, setProperty] = useState(null);
@@ -26,11 +27,8 @@ const PropertyDetailPage = () => {
     const fetchProperty = async () => {
       setLoading(true);
       try {
-        const response = await fetch(`${process.env.NEXT_PUBLIC_STRAPI_URI}/api/real-estate2s/${params.id}`);
-        if (!response.ok) {
-          throw new Error(`Failed to fetch property: ${response.statusText}`);
-        }
-        const result = await response.json();
+        const response = await axios.get(`${process.env.NEXT_PUBLIC_STRAPI_URI}/api/properties/${params.id}`);
+        const result = response.data;
         if (!result.data) {
           throw new Error("Property not found.");
         }
@@ -50,10 +48,8 @@ const PropertyDetailPage = () => {
 
     if (imageObject?.url) {
       url = imageObject.url;
-    } else if (imageObject?.data?.attributes?.url) {
-      url = imageObject.data.attributes.url;
-    } else if (imageObject?.attributes?.url) {
-      url = imageObject.attributes.url;
+    } else if (imageObject?.formats) {
+      url = imageObject.formats.large?.url || imageObject.url;
     }
 
     if (!url) return '/placeholder.png';
@@ -111,88 +107,111 @@ const PropertyDetailPage = () => {
   }
 
   const allImages = [
-    ...(property.hero_image ? [property.hero_image] : []),
-    ...(property.section?.map(s => s.image) || []),
-    ...(property.section2_media?.flatMap(s => s.image) || [])
-  ].filter(Boolean);
+    ...(property.herosection?.flatMap(h => h.heroImages || []) || []),
+    ...(property.overview?.flatMap(o => o.image ? [o.image] : []) || []),
+  ];
 
-  const renderPoints = (pointsArray, isLocation = false) => {
-    if (!pointsArray || pointsArray.length === 0) return null;
+const renderPoints = (pointsArray, isLocation = false) => {
+  if (!pointsArray || pointsArray.length === 0) return null;
 
-    // Debug logging
-    console.log('renderPoints called with:', pointsArray);
-    console.log('isLocation:', isLocation);
+  const bulletClass = isLocation ? 'bg-[#C4A77D]/20 text-[#C4A77D]' : 'bg-[#D32F2F]/20 text-[#D32F2F]';
 
-    const bulletClass = isLocation ? 'bg-[#C4A77D]/20 text-[#C4A77D]' : 'bg-[#D32F2F]/20 text-[#D32F2F]';
+  return pointsArray.map((pointsSection, sectionIndex) => (
+    <div key={sectionIndex} className="mb-8">
+      {pointsSection.points && pointsSection.points.length > 0 && (
+        <ul className="space-y-4">
+          {pointsSection.points.map((listBlock, blockIndex) => {
+            if (isLocation) {
+              // Location-specific rendering: assume flat {name, distanceMin} objects
+              const text = listBlock.name;
+              const distanceMin = listBlock.distanceMin;
 
-    return pointsArray.map((pointsSection, sectionIndex) => {
-      console.log('Processing pointsSection:', pointsSection);
+              if (!text || !distanceMin) return null; // Skip if missing key fields (edge case handling)
 
-      return (
-        <div key={sectionIndex} className="mb-8">
-          {pointsSection.points && pointsSection.points.length > 0 && (
-            <ul className="space-y-4">
-              {pointsSection.points.map((listBlock, blockIndex) => {
-                console.log('Processing listBlock:', listBlock);
+              return (
+                <motion.li
+                  key={blockIndex}
+                  initial={{ opacity: 0, x: -30 }}
+                  whileInView={{ opacity: 1, x: 0 }}
+                  transition={{ duration: 0.6, delay: blockIndex * 0.1 }}
+                  className="flex items-center justify-between py-3 border-b border-gray-200 last:border-b-0"
+                >
+                  {/* Left side: Icon and Text */}
+                  <div className="flex items-center">
+                    <span className="text-2xl mr-4 text-[#C4A77D]">
+                      {/* You can replace this emoji with an SVG icon */}
+                      📍
+                    </span>
+                    <span className="text-[#2E2E2E] leading-relaxed">{text}</span>
+                  </div>
 
-                // Handle the blocks structure from Strapi
-                if (listBlock.type === 'list' && listBlock.children) {
-                  return listBlock.children.map((listItem, itemIndex) => {
-                    if (listItem.type === 'list-item' && listItem.children) {
-                      const text = listItem.children.map(child => child.text || '').join(' ').trim();
+                  {/* Right side: Distance */}
+                  <span className="text-[#2E2E2E] font-semibold leading-relaxed">
+                    {distanceMin}
+                  </span>
+                </motion.li>
+              );
+            } else {
+              // Non-location: handle rich text blocks (lists or paragraphs)
+              let text = '';
+              let childItems = [];
 
-                      if (!text) return null;
+              if (listBlock.type === 'list' && listBlock.children) {
+                childItems = listBlock.children.filter(
+                  (listItem) => listItem.type === 'list-item' && listItem.children
+                );
+              } else if (listBlock.children && listBlock.children.length > 0) {
+                // Fallback for other blocks (e.g., paragraphs)
+                text = listBlock.children.map((child) => child.text || '').join(' ').trim();
+              }
 
-                      return (
-                        <motion.li
-                          key={`${blockIndex}-${itemIndex}`}
-                          initial={{ opacity: 0, x: -30 }}
-                          whileInView={{ opacity: 1, x: 0 }}
-                          transition={{ duration: 0.6, delay: itemIndex * 0.1 }}
-                          className="flex items-start"
-                        >
-                          <span className={`flex-shrink-0 w-8 h-8 rounded-full ${bulletClass} flex items-center justify-center text-sm font-bold mr-4 mt-1`}>
-                            {itemIndex + 1}
-                          </span>
-                          <span className="text-[#2E2E2E] leading-relaxed">{text}</span>
-                        </motion.li>
-                      );
-                    }
-                    return null;
-                  }).filter(Boolean);
-                }
-
-                // Fallback for other block types
-                if (listBlock.children && listBlock.children.length > 0) {
-                  const text = listBlock.children.map(child => child.text || '').join(' ').trim();
-
-                  if (!text) return null;
+              if (childItems.length > 0) {
+                // Render sub-items for lists
+                return childItems.map((listItem, itemIndex) => {
+                  const itemText = listItem.children.map((child) => child.text || '').join(' ').trim();
+                  if (!itemText) return null; // Skip empty items
 
                   return (
                     <motion.li
-                      key={blockIndex}
+                      key={`${blockIndex}-${itemIndex}`}
                       initial={{ opacity: 0, x: -30 }}
                       whileInView={{ opacity: 1, x: 0 }}
-                      transition={{ duration: 0.6, delay: blockIndex * 0.1 }}
-                      className="flex items-start"
+                      transition={{ duration: 0.6, delay: itemIndex * 0.1 }}
+                      className="flex items-center gap-4"
                     >
-                      <span className={`flex-shrink-0 w-8 h-8 rounded-full ${bulletClass} flex items-center justify-center text-sm font-bold mr-4 mt-1`}>
-                        {blockIndex + 1}
+                      <span className={`flex-shrink-0 w-8 h-8 rounded-full ${bulletClass} flex items-center justify-center text-sm font-bold`}>
+                        {itemIndex + 1}
                       </span>
-                      <span className="text-[#2E2E2E] leading-relaxed">{text}</span>
+                      <span className="text-[#2E2E2E] leading-relaxed flex-1">{itemText}</span>
                     </motion.li>
                   );
-                }
+                }).filter(Boolean);
+              } else if (text) {
+                // Render single block as li (e.g., paragraph fallback)
+                return (
+                  <motion.li
+                    key={blockIndex}
+                    initial={{ opacity: 0, x: -30 }}
+                    whileInView={{ opacity: 1, x: 0 }}
+                    transition={{ duration: 0.6, delay: blockIndex * 0.1 }}
+                    className="flex items-center gap-4"
+                  >
+                    <span className={`flex-shrink-0 w-8 h-8 rounded-full ${bulletClass} flex items-center justify-center text-sm font-bold`}>
+                      {blockIndex + 1}
+                    </span>
+                    <span className="text-[#2E2E2E] leading-relaxed flex-1">{text}</span>
+                  </motion.li>
+                );
+              }
 
-                return null;
-              }).filter(Boolean)}
-            </ul>
-          )}
-        </div>
-      );
-    });
-  };
-
+              return null; // Skip if no renderable content
+            }
+          }).filter(Boolean)}
+        </ul>
+      )}
+    </div>
+  ));
+};
   const renderIntro = (intro) => {
     if (!intro || intro.length === 0) return null;
     return intro.map((item, index) => (
@@ -224,22 +243,22 @@ const PropertyDetailPage = () => {
           </motion.p>
         )}
         {item.iframe && (
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.6 }}
-          className="mt-8"
-        >
-          <iframe
-            src={item.iframe}  // You'll update this src later with the correct embed URL
-            className="w-full h-64 md:h-96 rounded-xl shadow-lg"
-            frameBorder="0"
-            allowFullScreen
-            loading="lazy"
-            title="Location Map"
-          />
-        </motion.div>
-      )}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.6 }}
+            className="mt-8"
+          >
+            <iframe
+              src={item.iframe}  // You'll update this src later with the correct embed URL
+              className="w-full h-64 md:h-96 rounded-xl shadow-lg"
+              frameBorder="0"
+              allowFullScreen
+              loading="lazy"
+              title="Location Map"
+            />
+          </motion.div>
+        )}
       </div>
     ));
   };
@@ -304,8 +323,8 @@ const PropertyDetailPage = () => {
           transition={{ duration: 0.8 }}
           className="absolute bottom-0 left-0 right-0 p-8 md:p-16 text-white"
         >
-          <h1 className="text-4xl md:text-6xl font-light mb-4 leading-tight tracking-wide">{property.short_description}</h1>
-          <p className="text-xl md:text-2xl mb-8 text-[#B0B0B0]">{property.below_icon_text}</p>
+          <h1 className="text-4xl md:text-6xl font-light mb-4 leading-tight tracking-wide">{property.herosection?.[0]?.PropertyName}</h1>
+          <p className="text-xl md:text-2xl mb-8 text-[#B0B0B0]">{property.herosection?.[0]?.tagline}</p>
           <motion.button
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
@@ -319,7 +338,7 @@ const PropertyDetailPage = () => {
       {/* Main Content */}
       <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 lg:py-24">
         {/* Project Overview Section */}
-        {property.section && property.section.length > 0 && (
+        {property.overview && property.overview.length > 0 && (
           <section className="mb-20 lg:mb-32">
             <motion.h2
               initial={{ opacity: 0, y: 30 }}
@@ -331,7 +350,7 @@ const PropertyDetailPage = () => {
             </motion.h2>
 
             <div className="space-y-20 lg:space-y-32">
-              {property.section.map((item, index) => {
+              {property.overview.map((item, index) => {
                 const isEven = index % 2 === 0;
 
                 return (
@@ -341,7 +360,7 @@ const PropertyDetailPage = () => {
                       initial={{ opacity: 0, y: -60 }}
                       whileInView={{ opacity: 1, y: 0 }}
                       transition={{ duration: 0.8, delay: 0.2 }}
-                      className={`relative aspect-[4/3] rounded-2xl overflow-hidden ${!isEven ? 'lg:col-start-2' : ''}`}
+                      className={`relative aspect-[4/3] overflow-hidden ${!isEven ? 'lg:col-start-2' : ''}`}
                     >
                       {item.image && (
                         <Image
@@ -362,7 +381,7 @@ const PropertyDetailPage = () => {
                       className={`space-y-6 ${!isEven ? 'lg:col-start-1 lg:row-start-1' : ''}`}
                     >
                       <h3 className="text-3xl lg:text-4xl font-light text-[#2E2E2E] leading-tight tracking-wide">
-                        {item.title}
+                        {item.Title}
                       </h3>
                       <p className="text-lg lg:text-xl text-black leading-relaxed">
                         {item.description}
@@ -379,13 +398,13 @@ const PropertyDetailPage = () => {
         )}
 
         {/* Amenities Section */}
-        {(property.section2_intro?.length > 0 || property.section2_points?.length > 0) && (
+        {(property.ameneties?.length > 0 || property.ameneties?.flatMap(a => a.ameneties_list || [])?.length > 0) && (
           <section className="mb-20 lg:mb-32">
             <motion.div
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8 }}
-              className="bg-white rounded-3xl p-8 lg:p-16 shadow-lg"
+              className="bg-[#F9F9F9] p-8 lg:p-16 "
             >
               <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-start">
                 <motion.div
@@ -393,14 +412,14 @@ const PropertyDetailPage = () => {
                   whileInView={{ opacity: 1, x: 0 }}
                   transition={{ duration: 0.8, delay: 0.2 }}
                 >
-                  {renderIntro(property.section2_intro)}
+                  {renderIntro(property.ameneties?.length > 0 ? [{ title: property.ameneties[0].title, description: property.ameneties[0].description }] : [])}
                 </motion.div>
                 <motion.div
                   initial={{ opacity: 0, x: 40 }}
                   whileInView={{ opacity: 1, x: 0 }}
                   transition={{ duration: 0.8, delay: 0.4 }}
                 >
-                  {renderPoints(property.section2_points, false)}
+                  {renderPoints(property.ameneties?.flatMap(a => ({ points: a.ameneties_list || [] })))}
                 </motion.div>
               </div>
             </motion.div>
@@ -408,7 +427,7 @@ const PropertyDetailPage = () => {
         )}
 
         {/* Gallery Section */}
-        {property.section2_media?.flatMap(s => s.image).filter(Boolean).length > 0 && (
+        {property.herosection?.flatMap(h => h.heroImages || []).filter(Boolean).length > 0 && (
           <section className="mb-20 lg:mb-32">
             <motion.h2
               initial={{ opacity: 0, y: 30 }}
@@ -419,10 +438,10 @@ const PropertyDetailPage = () => {
               Gallery
             </motion.h2>
             <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 lg:gap-6">
-              {property.section2_media.flatMap(s => s.image).filter(Boolean).map((img, index) => (
+              {property.herosection.flatMap(h => h.heroImages || []).filter(Boolean).map((img, index) => (
                 <motion.div
                   key={index}
-                  className="relative aspect-square rounded-xl overflow-hidden cursor-pointer group"
+                  className="relative aspect-square overflow-hidden cursor-pointer group"
                   initial={{ opacity: 0, scale: 0.8 }}
                   whileInView={{ opacity: 1, scale: 1 }}
                   whileHover={{ scale: 1.05 }}
@@ -441,9 +460,45 @@ const PropertyDetailPage = () => {
             </div>
           </section>
         )}
+        {/* Brochure section  */}
 
-        {/* Location Section */}
-        {(property.section3_intro?.length > 0 || property.section3_points?.length > 0) && (
+        <section className="mb-20 lg:mb-32">
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8 }}
+            className="text-center"
+          >
+            
+            {/* Download Brochure Button */}
+            {property.brochure?.property_brochure && (
+              
+              <motion.a
+                href={getImageUrl(property.brochure.property_brochure)}
+                download
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+                className="inline-flex items-center gap-3 bg-[#D32F2F] text-white px-8 py-4 rounded-lg font-semibold hover:bg-[#B71C1C] transition-all duration-300 shadow-lg hover:shadow-xl mb-6"
+              >
+                <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+                </svg>
+                Download Brochure
+              </motion.a>
+            )}
+            
+            {/* Contact Sales Team Number */}
+            <div className="mt-6">
+              <p className="text-lg text-[#2E2E2E]">
+                Contact our sales team: <a href="tel:+919876543210" className="text-[#D32F2F] font-bold text-xl hover:underline">+91 98765 43210</a>
+              </p>
+            </div>
+          </motion.div>
+        </section>
+        </main>
+        
+        <div className='px-4 sm:px-6 lg:px-8'>  
+        {(property.location || (property.location?.highlights_list && property.location?.highlights_list.length > 0)) && (
           <section className="mb-20">
             <motion.h2
               initial={{ opacity: 0, y: 30 }}
@@ -457,7 +512,7 @@ const PropertyDetailPage = () => {
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 0.2 }}
-              className="bg-gradient-to-br from-[#C4A77D]/10 to-[#D32F2F]/5 p-8 lg:p-16 rounded-3xl"
+              className="bg-gradient-to-br from-[#C4A77D]/10 to-[#D32F2F]/5  lg:p-16 p-40"
             >
               <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-start">
                 <motion.div
@@ -465,21 +520,23 @@ const PropertyDetailPage = () => {
                   whileInView={{ opacity: 1, x: 0 }}
                   transition={{ duration: 0.8, delay: 0.4 }}
                 >
-                  {renderIntro(property.section3_intro)}
+                  {renderIntro(property.location ? [{ title: property.location.title, description: property.location.description, iframe: property.location.map_embed_url }] : [])}
                 </motion.div>
                 <motion.div
                   initial={{ opacity: 0, x: 40 }}
                   whileInView={{ opacity: 1, x: 0 }}
                   transition={{ duration: 0.8, delay: 0.6 }}
                 >
-                  {renderPoints(property.section3_points, true)}
+                  {renderPoints(property.location ? [{ points: property.location.list || [] }] : [], true)}
                 </motion.div>
               </div>
             </motion.div>
           </section>
         )}
-        {/* Creating the World's Finest Section */}
-        <section className="mb-20 lg:mb-32">
+        </div>
+
+        <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 lg:py-24">
+          <section className="mb-20 lg:mb-32">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -494,76 +551,88 @@ const PropertyDetailPage = () => {
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 lg:gap-12">
             {/* Card 1 - Living Space */}
             <motion.div
-              initial={{ opacity: 0, y: 40 }}
+              initial={{ opacity: 0, y: 50 }}
               whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, delay: 0.1 }}
-              className="bg-white rounded-2xl overflow-hidden shadow-lg hover:shadow-xl transition-shadow duration-300"
+              transition={{ duration: 0.6, ease: "easeOut" }}
+              viewport={{ once: true }}
+              className="bg-white overflow-hidden shadow-lg hover:shadow-xl transition-shadow duration-300"
             >
               <div className="relative h-64 lg:h-72">
                 <Image
-                  src="https://images.unsplash.com/photo-1586023492125-27b2c045efd7?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80"
+                  src="/real-estate/DSC09034.jpg"
                   alt="Luxury living space with modern design"
                   fill
                   style={{ objectFit: 'cover' }}
-                  className="hover:scale-105 transition-transform duration-700"
+                  className="transition-transform duration-300 group-hover:scale-105"
                 />
               </div>
               <div className="p-6 lg:p-8">
-                <p className="text-[#666666] leading-relaxed text-center">
-                  Recognizing the profound impact of design and service on well-being, we create thoughtful and purposeful living spaces.
+                <h3 className="text-xl lg:text-2xl font-bold text-gray-800 mb-3">Exquisite Living Spaces</h3>
+                <p className="text-gray-600">
+                  Step into a world of comfort and elegance. Our properties feature meticulously designed interiors, offering the perfect blend of modern aesthetics and functionality.
                 </p>
               </div>
             </motion.div>
 
             {/* Card 2 - Lifestyle Experience */}
             <motion.div
-              initial={{ opacity: 0, y: 40 }}
+              initial={{ opacity: 0, y: 50 }}
               whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, delay: 0.2 }}
-              className="bg-white rounded-2xl overflow-hidden shadow-lg hover:shadow-xl transition-shadow duration-300"
+              transition={{ duration: 0.6, delay: 0.1, ease: "easeOut" }}
+              viewport={{ once: true }}
+              className="bg-white overflow-hidden shadow-lg hover:shadow-xl transition-shadow duration-300"
             >
               <div className="relative h-64 lg:h-72">
                 <Image
-                  src="https://images.unsplash.com/photo-1544787219-7f47ccb76574?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80"
-                  alt="Elegant tea service representing luxury lifestyle"
+                  src="/real-estate/DSC09052.jpg"
+                  alt="A vibrant lifestyle experience"
                   fill
                   style={{ objectFit: 'cover' }}
-                  className="hover:scale-105 transition-transform duration-700"
+                  className="transition-transform duration-300 group-hover:scale-105"
                 />
               </div>
               <div className="p-6 lg:p-8">
-                <p className="text-[#666666] leading-relaxed text-center">
-                  Committed to surpassing expectations, our carefully crafted events and experiences ensure an enriched and empowered lifestyle.
+                <h3 className="text-xl lg:text-2xl font-bold text-gray-800 mb-3">Unmatched Lifestyle Experience</h3>
+                <p className="text-gray-600">
+                  We create more than just homes; we build communities. Enjoy a lifestyle enriched with premium amenities, lush green spaces, and a vibrant social environment.
                 </p>
               </div>
             </motion.div>
 
-            {/* Card 3 - Sustainable Development */}
+            {/* Card 3 - Prime Locations */}
             <motion.div
-              initial={{ opacity: 0, y: 40 }}
+              initial={{ opacity: 0, y: 50 }}
               whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, delay: 0.3 }}
-              className="bg-white rounded-2xl overflow-hidden shadow-lg hover:shadow-xl transition-shadow duration-300 md:col-span-2 lg:col-span-1"
+              transition={{ duration: 0.6, delay: 0.2, ease: "easeOut" }}
+              viewport={{ once: true }}
+              className="bg-white  overflow-hidden shadow-lg hover:shadow-xl transition-shadow duration-300"
             >
               <div className="relative h-64 lg:h-72">
                 <Image
-                  src="https://images.unsplash.com/photo-1558618047-3c8c76ca7d13?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80"
-                  alt="Modern sustainable architecture in natural setting"
+                  src="/real-estate/Aerial1.png"
+                  alt="A property in a prime location"
                   fill
                   style={{ objectFit: 'cover' }}
-                  className="hover:scale-105 transition-transform duration-700"
+                  className="transition-transform duration-300 group-hover:scale-105"
                 />
               </div>
               <div className="p-6 lg:p-8">
-                <p className="text-[#666666] leading-relaxed text-center">
-                  We are creating homes and workspaces for an ever-changing tomorrow, where luxury and sustainability can co-exist in perfect harmony.
+                <h3 className="text-xl lg:text-2xl font-bold text-gray-800 mb-3">Prime & Strategic Locations</h3>
+                <p className="text-gray-600">
+                  Our developments are situated in the most sought-after locations, ensuring convenience, connectivity, and a high-quality of life for all our residents.
                 </p>
               </div>
             </motion.div>
           </div>
         </section>
+        </main>
+        {/* Location Section */}
+        
+        {/* Creating the World's Finest Section */}
+        
 
-      </main>
+      
+
     </div>
   );
 };

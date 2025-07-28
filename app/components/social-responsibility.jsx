@@ -88,19 +88,19 @@ export default function SocialResponsibilityPage() {
     <div className="font-sans text-slate-700" style={{ backgroundColor: '#F9F7F3' }}>
       <main className="overflow-hidden">
         {/* Hero Section */}
-        <header className="relative text-center py-20 md:py-32 px-4">
+        <header className="relative text-center py-16 sm:py-20 md:py-32 px-4">
             <div className="absolute inset-0 bg-grid-slate-100 [mask-image:linear-gradient(to_bottom,white_5%,transparent_95%)]"></div>
             <div className="relative max-w-4xl mx-auto">
                 <AnimatedSection>
-                    <h1 className="text-4xl md:text-6xl font-extrabold tracking-tight text-slate-800">
+                    <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-6xl font-extrabold tracking-tight text-slate-800">
                         {data.title}
                     </h1>
-                    <h2 className="mt-4 text-xl md:text-2xl font-medium text-emerald-700">
+                    <h2 className="mt-3 sm:mt-4 text-lg sm:text-xl md:text-2xl font-medium text-emerald-700">
                         {data.subtitle}
                     </h2>
                 </AnimatedSection>
                 <AnimatedSection>
-                    <p className="mt-8 text-lg md:text-xl max-w-3xl mx-auto text-slate-600 leading-relaxed">
+                    <p className="mt-6 sm:mt-8 text-base sm:text-lg md:text-xl max-w-3xl mx-auto text-slate-600 leading-relaxed">
                         {data.intro}
                     </p>
                 </AnimatedSection>
@@ -108,18 +108,18 @@ export default function SocialResponsibilityPage() {
         </header>
 
         {/* Belief Section */}
-        <section className="py-16 md:py-24 px-4">
+        <section className="py-12 sm:py-16 md:py-24 px-4">
           <div className="max-w-4xl mx-auto">
-            <AnimatedSection className="bg-slate-800 text-white p-8 md:p-12 rounded-2xl shadow-2xl transform hover:scale-[1.02] transition-transform duration-500">
+            <AnimatedSection className="bg-slate-800 text-white p-6 sm:p-8 md:p-12 rounded-2xl shadow-2xl transform hover:scale-[1.02] transition-transform duration-500">
               <div className="flex flex-col md:flex-row items-center text-center md:text-left">
-                <span className="text-6xl md:mr-8 mb-4 md:mb-0">
+                <span className="text-4xl sm:text-5xl md:text-6xl md:mr-8 mb-3 sm:mb-4 md:mb-0">
                   {data.belief.emoji}
                 </span>
                 <div>
-                  <h3 className="text-2xl md:text-3xl font-bold" style={{ color: '#D4AF37' }}>
+                  <h3 className="text-xl sm:text-2xl md:text-3xl font-bold" style={{ color: '#D4AF37' }}>
                     {data.belief.title}
                   </h3>
-                  <p className="mt-4 text-lg md:text-xl text-slate-300">
+                  <p className="mt-3 sm:mt-4 text-base sm:text-lg md:text-xl text-slate-300">
                     {data.belief.text}
                   </p>
                 </div>
@@ -129,24 +129,24 @@ export default function SocialResponsibilityPage() {
         </section>
 
         {/* Contributions Section */}
-        <section className="py-16 md:py-24 px-4 bg-white">
+        <section className="py-12 sm:py-16 md:py-24 px-4 bg-white">
           <div className="max-w-6xl mx-auto">
-            <AnimatedSection className="text-center mb-12">
-              <h2 className="text-3xl md:text-4xl font-extrabold tracking-tight text-slate-800">
+            <AnimatedSection className="text-center mb-8 sm:mb-10 md:mb-12">
+              <h2 className="text-2xl sm:text-3xl md:text-4xl font-extrabold tracking-tight text-slate-800">
                 Our Key Contributions
               </h2>
             </AnimatedSection>
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-8">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 sm:gap-8">
               {data.contributions.map((item, idx) => (
                 <AnimatedSection key={idx}>
-                  <div className="bg-slate-50 p-8 rounded-xl border border-slate-200 h-full hover:shadow-lg hover:border-emerald-500 transition-all duration-300">
-                    <div className="flex items-center mb-4">
-                      <span className="text-4xl mr-4">{item.emoji}</span>
-                      <h4 className="text-xl font-bold text-emerald-800">
+                  <div className="bg-slate-50 p-6 sm:p-8 rounded-xl border border-slate-200 h-full hover:shadow-lg hover:border-emerald-500 transition-all duration-300">
+                    <div className="flex items-center mb-3 sm:mb-4">
+                      <span className="text-3xl sm:text-4xl mr-3 sm:mr-4">{item.emoji}</span>
+                      <h4 className="text-lg sm:text-xl font-bold text-emerald-800">
                         {item.title}
                       </h4>
                     </div>
-                    <p className="text-slate-600 leading-relaxed">
+                    <p className="text-sm sm:text-base text-slate-600 leading-relaxed">
                       {item.text}
                     </p>
                   </div>
@@ -157,22 +157,22 @@ export default function SocialResponsibilityPage() {
         </section>
 
         {/* Future Promise Section */}
-        <section className="py-16 md:py-24 px-4">
+        <section className="py-12 sm:py-16 md:py-24 px-4">
           <div className="max-w-4xl mx-auto">
-            <AnimatedSection className="bg-white p-8 md:p-12 rounded-2xl border border-gray-200 shadow-xl">
-              <h3 className="text-2xl md:text-3xl font-bold text-center text-slate-800">
+            <AnimatedSection className="bg-white p-6 sm:p-8 md:p-12 rounded-2xl border border-gray-200 shadow-xl">
+              <h3 className="text-xl sm:text-2xl md:text-3xl font-bold text-center text-slate-800">
                 {data.future.title}
               </h3>
-              <p className="mt-4 text-lg text-center text-slate-600">
+              <p className="mt-3 sm:mt-4 text-base sm:text-lg text-center text-slate-600">
                 {data.future.text}
               </p>
-              <ul className="mt-8 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 text-center">
+              <ul className="mt-6 sm:mt-8 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-3 sm:gap-4 text-center">
                 {data.future.points.map((point, idx) => (
                   <li
                     key={idx}
-                    className="bg-emerald-50 text-emerald-800 font-semibold py-3 px-4 rounded-lg flex items-center justify-center"
+                    className="bg-emerald-50 text-emerald-800 font-semibold py-2 sm:py-3 px-3 sm:px-4 rounded-lg flex items-center justify-center text-sm sm:text-base"
                   >
-                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="mr-2 flex-shrink-0"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="mr-1 sm:mr-2 flex-shrink-0"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg>
                     {point}
                   </li>
                 ))}
@@ -182,20 +182,20 @@ export default function SocialResponsibilityPage() {
         </section>
 
         {/* Closing Section */}
-        <footer className="bg-slate-800 text-white py-20 px-4">
+        <footer className="bg-slate-800 text-white py-16 sm:py-20 px-4">
           <div className="max-w-4xl mx-auto text-center">
             <AnimatedSection>
-              <span className="text-6xl">{data.closing.emoji}</span>
-              <h3 className="mt-6 text-3xl md:text-4xl font-bold" style={{ color: '#D4AF37' }}>
+              <span className="text-4xl sm:text-5xl md:text-6xl">{data.closing.emoji}</span>
+              <h3 className="mt-4 sm:mt-6 text-2xl sm:text-3xl md:text-4xl font-bold" style={{ color: '#D4AF37' }}>
                 {data.closing.title}
               </h3>
-              <p className="mt-4 text-lg md:text-xl text-slate-300 max-w-2xl mx-auto">
+              <p className="mt-3 sm:mt-4 text-base sm:text-lg md:text-xl text-slate-300 max-w-2xl mx-auto">
                 {data.closing.text}
               </p>
             </AnimatedSection>
             <AnimatedSection>
-              <div className="mt-12 bg-emerald-900/20 border border-emerald-500/30 p-6 rounded-lg inline-block">
-                 <p className="text-lg font-medium text-emerald-300">
+              <div className="mt-8 sm:mt-12 bg-emerald-900/20 border border-emerald-500/30 p-4 sm:p-6 rounded-lg inline-block">
+                 <p className="text-base sm:text-lg font-medium text-emerald-300">
                     <span className="font-bold">📩 Let's Collaborate:</span> {data.contact}
                 </p>
               </div>

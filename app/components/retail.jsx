@@ -28,14 +28,14 @@ const RetailPage = () => {
                 <Store className="w-6 h-6 text-yellow-400" />
                 <span className="text-sm font-medium">Since 1998</span>
               </div>
-              <h1 className="text-4xl md:text-6xl font-bold mb-6 leading-tight">
+              <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold mb-4 md:mb-6 leading-tight">
                 Ambika <span className="text-yellow-400">Retail</span>
               </h1>
-              <p className="text-xl md:text-2xl mb-8 font-light opacity-95">
+              <p className="text-lg sm:text-xl md:text-2xl mb-6 md:mb-8 font-light opacity-95">
                 From Shelves to Spaces, We've Been There
               </p>
-              <p className="text-lg leading-relaxed mb-8 opacity-90">
-                Our story began with <strong>Ambika Paints and Hardware Stores</strong> in 1998—a small retail outlet 
+              <p className="text-base sm:text-lg leading-relaxed mb-6 md:mb-8 opacity-90">
+                Our story began with <strong>Ambika Paints and Hardware Stores</strong> in 1998—a small retail outlet
                 that became synonymous with reliability and quality in Bhopal.
               </p>
               {/* <div className="flex flex-col sm:flex-row gap-4">
@@ -50,26 +50,26 @@ const RetailPage = () => {
               </div> */}
             </div>
             <div className="relative">
-              <div className="grid grid-cols-2 gap-4">
-                <div className="bg-white/10 backdrop-blur-sm rounded-3xl p-6 transform rotate-0 hover:rotate-0 transition-transform duration-300">
-                  <Palette className="w-12 h-12 text-yellow-400 mb-4" />
-                  <h3 className="text-lg font-bold mb-2">Paints & Colors</h3>
-                  <p className="text-sm opacity-80">Premium quality paints for every surface</p>
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4">
+                <div className="bg-white/10 backdrop-blur-sm rounded-2xl sm:rounded-3xl p-4 sm:p-6 transform rotate-0 hover:rotate-0 transition-transform duration-300">
+                  <Palette className="w-8 sm:w-10 md:w-12 h-8 sm:h-10 md:h-12 text-yellow-400 mb-2 sm:mb-4" />
+                  <h3 className="text-sm sm:text-base md:text-lg font-bold mb-1 sm:mb-2">Paints & Colors</h3>
+                  <p className="text-xs sm:text-sm opacity-80">Premium quality paints for every surface</p>
                 </div>
-                <div className="bg-white/10 backdrop-blur-sm rounded-3xl p-6 transform -rotate-0 hover:rotate-0 transition-transform duration-300 mt-8">
-                  <Hammer className="w-12 h-12 text-yellow-400 mb-4" />
-                  <h3 className="text-lg font-bold mb-2">Hardware Tools</h3>
-                  <p className="text-sm opacity-80">Professional grade construction tools</p>
+                <div className="bg-white/10 backdrop-blur-sm rounded-2xl sm:rounded-3xl p-4 sm:p-6 transform -rotate-0 hover:rotate-0 transition-transform duration-300 sm:mt-8">
+                  <Hammer className="w-8 sm:w-10 md:w-12 h-8 sm:h-10 md:h-12 text-yellow-400 mb-2 sm:mb-4" />
+                  <h3 className="text-sm sm:text-base md:text-lg font-bold mb-1 sm:mb-2">Hardware Tools</h3>
+                  <p className="text-xs sm:text-sm opacity-80">Professional grade construction tools</p>
                 </div>
-                <div className="bg-white/10 backdrop-blur-sm rounded-3xl p-6 transform rotate-0 hover:rotate-0 transition-transform duration-300">
-                  <Home className="w-12 h-12 text-yellow-400 mb-4" />
-                  <h3 className="text-lg font-bold mb-2">Home Solutions</h3>
-                  <p className="text-sm opacity-80">Complete interior finishing materials</p>
+                <div className="bg-white/10 backdrop-blur-sm rounded-2xl sm:rounded-3xl p-4 sm:p-6 transform rotate-0 hover:rotate-0 transition-transform duration-300">
+                  <Home className="w-8 sm:w-10 md:w-12 h-8 sm:h-10 md:h-12 text-yellow-400 mb-2 sm:mb-4" />
+                  <h3 className="text-sm sm:text-base md:text-lg font-bold mb-1 sm:mb-2">Home Solutions</h3>
+                  <p className="text-xs sm:text-sm opacity-80">Complete interior finishing materials</p>
                 </div>
-                <div className="bg-white/10 backdrop-blur-sm rounded-3xl p-6 transform -rotate-0 hover:rotate-0 transition-transform duration-300 mt-8">
-                  <Building2 className="w-12 h-12 text-yellow-400 mb-4" />
-                  <h3 className="text-lg font-bold mb-2">Construction</h3>
-                  <p className="text-sm opacity-80">Building materials for every project</p>
+                <div className="bg-white/10 backdrop-blur-sm rounded-2xl sm:rounded-3xl p-4 sm:p-6 transform -rotate-0 hover:rotate-0 transition-transform duration-300 sm:mt-8">
+                  <Building2 className="w-8 sm:w-10 md:w-12 h-8 sm:h-10 md:h-12 text-yellow-400 mb-2 sm:mb-4" />
+                  <h3 className="text-sm sm:text-base md:text-lg font-bold mb-1 sm:mb-2">Construction</h3>
+                  <p className="text-xs sm:text-sm opacity-80">Building materials for every project</p>
                 </div>
               </div>
             </div>
@@ -136,21 +136,21 @@ const RetailPage = () => {
           </div>
 
           {/* Tab Navigation */}
-          <div className="flex flex-wrap justify-center gap-4 mb-12">
+          <div className="flex flex-wrap justify-center gap-2 sm:gap-3 md:gap-4 mb-8 md:mb-12 px-4">
             {tabs.map((tab) => {
               const Icon = tab.icon;
               return (
                 <button
                   key={tab.id}
                   onClick={() => setActiveTab(tab.id)}
-                  className={`flex items-center gap-2 px-6 py-3 rounded-full font-medium transition-all duration-300 ${
-                    activeTab === tab.id 
-                      ? 'bg-red-600 text-white shadow-lg' 
+                  className={`flex items-center gap-1 sm:gap-2 px-3 sm:px-4 md:px-6 py-2 sm:py-3 rounded-full font-medium text-sm sm:text-base transition-all duration-300 ${activeTab === tab.id
+                      ? 'bg-red-600 text-white shadow-lg'
                       : 'bg-gray-700 text-gray-300 hover:bg-gray-600'
-                  }`}
+                    }`}
                 >
-                  <Icon className="w-5 h-5" />
-                  {tab.label}
+                  <Icon className="w-4 sm:w-5 h-4 sm:h-5" />
+                  <span className="hidden xs:inline sm:inline">{tab.label}</span>
+                  <span className="xs:hidden sm:hidden">{tab.label.split(' ')[0]}</span>
                 </button>
               );
             })}
@@ -275,7 +275,7 @@ const RetailPage = () => {
             Why We're <span className="text-red-600">Different</span>
           </h2>
         </div>
-        
+
         <div className="grid md:grid-cols-3 gap-8">
           <div className="group">
             <div className="bg-white rounded-3xl p-8 shadow-lg hover:shadow-2xl transition-all duration-500 transform group-hover:-translate-y-2">
@@ -291,7 +291,7 @@ const RetailPage = () => {
               </p>
             </div>
           </div>
-          
+
           <div className="group">
             <div className="bg-white rounded-3xl p-8 shadow-lg hover:shadow-2xl transition-all duration-500 transform group-hover:-translate-y-2">
               <div className="flex items-center gap-4 mb-6">
@@ -306,7 +306,7 @@ const RetailPage = () => {
               </p>
             </div>
           </div>
-          
+
           <div className="group">
             <div className="bg-white rounded-3xl p-8 shadow-lg hover:shadow-2xl transition-all duration-500 transform group-hover:-translate-y-2">
               <div className="flex items-center gap-4 mb-6">
@@ -333,7 +333,7 @@ const RetailPage = () => {
                 Evolving for a <span className="text-yellow-400">New India</span>
               </h2>
               <p className="text-xl leading-relaxed mb-8 opacity-95">
-                As demand, design, and delivery change with time, we are actively exploring organized retail formats, 
+                As demand, design, and delivery change with time, we are actively exploring organized retail formats,
                 digitally enabled procurement, and end-to-end project support to serve modern India's homeowners and builders better.
               </p>
               <div className="bg-yellow-400 text-gray-800 rounded-2xl p-6 mb-8">
@@ -377,11 +377,11 @@ const RetailPage = () => {
                 Visit Us or <span className="text-red-600">Partner</span> With Us
               </h2>
               <p className="text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed">
-                If you're a builder, vendor, or homeowner—we'd love to work with you. We're growing, expanding, 
+                If you're a builder, vendor, or homeowner—we'd love to work with you. We're growing, expanding,
                 and always open to meaningful partnerships that align with our values.
               </p>
             </div>
-            
+
             <div className="grid md:grid-cols-2 gap-8">
               <div className="bg-gradient-to-br from-red-100 to-yellow-100 rounded-3xl p-8">
                 <div className="flex items-center gap-4 mb-6">
@@ -403,7 +403,7 @@ const RetailPage = () => {
                   Get Directions
                 </button>
               </div>
-              
+
               <div className="bg-gradient-to-br from-yellow-100 to-red-100 rounded-3xl p-8">
                 <div className="flex items-center gap-4 mb-6">
                   <Mail className="w-12 h-12 text-yellow-600" />
@@ -419,10 +419,14 @@ const RetailPage = () => {
                     <span className="text-gray-700">Partnership Opportunities</span>
                   </div>
                 </div>
-                <button className="w-full bg-yellow-400 hover:bg-yellow-500 text-gray-800 px-6 py-4 rounded-2xl font-semibold transition-colors duration-300 mt-6 flex items-center justify-center gap-2">
-                  <ArrowRight className="w-5 h-5" />
-                  Start Conversation
-                </button>
+                <a href="mailto:retail@houseofambika.com?subject=Start%20Conversation&body=Hello,%20I%20would%20like%20to%20start%20a%20conversation.">
+                  <button
+                    className="w-full bg-yellow-400 cursor-pointer hover:bg-yellow-500 text-gray-800 px-6 py-4 rounded-2xl font-semibold transition-colors duration-300 mt-6 flex items-center justify-center gap-2"
+                  >
+                    <ArrowRight className="w-5 h-5" />
+                    Start Conversation
+                  </button>
+                </a>
               </div>
             </div>
           </div>

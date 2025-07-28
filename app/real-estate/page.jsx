@@ -3,6 +3,7 @@ import { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import Link from 'next/link';
 import Image from 'next/image';
+import axios from 'axios';
 
 const RealEstatePage = () => {
   const [properties, setProperties] = useState([]);
@@ -17,13 +18,11 @@ const RealEstatePage = () => {
     const fetchProperties = async () => {
       setLoading(true);
       try {
-        const response = await fetch(
-          `${process.env.NEXT_PUBLIC_STRAPI_URI}/api/real-estate2s?pagination[page]=${currentPage}&pagination[pageSize]=${propertiesPerPage}`
+        const res = await axios.get(
+          `${process.env.NEXT_PUBLIC_STRAPI_URI}/api/properties?pagination[page]=${currentPage}&pagination[pageSize]=${propertiesPerPage}`
         );
-        if (!response.ok) {
-          throw new Error('Failed to fetch properties');
-        }
-        const data = await response.json();
+        const data = res.data;
+        console.log(data);
         setProperties(data.data);
         setTotal(data.meta.pagination.total);
         setTotalPages(data.meta.pagination.pageCount);
@@ -89,11 +88,10 @@ const RealEstatePage = () => {
         <button
           key={i}
           onClick={() => handlePageChange(i)}
-          className={`w-10 h-10 rounded-lg transition-colors duration-300 text-sm font-medium ${
-            currentPage === i
+          className={`w-10 h-10 rounded-lg transition-colors duration-300 text-sm font-medium ${currentPage === i
               ? 'bg-[#D32F2F] text-white'
               : 'bg-white text-[#2E2E2E] hover:bg-[#D32F2F] hover:text-white'
-          }`}
+            }`}
         >
           {i}
         </button>
@@ -138,7 +136,7 @@ const RealEstatePage = () => {
   if (error) {
     return (
       <div className="min-h-screen bg-[#F9F9F9] flex items-center justify-center">
-        <motion.div 
+        <motion.div
           initial={{ opacity: 0, scale: 0.8 }}
           animate={{ opacity: 1, scale: 1 }}
           className="text-center bg-white p-8 rounded-2xl shadow-xl max-w-md mx-4"
@@ -146,7 +144,7 @@ const RealEstatePage = () => {
           <div className="text-[#D32F2F] text-6xl mb-4">⚠️</div>
           <h2 className="text-[#2E2E2E] text-2xl font-bold mb-2">Connection Error</h2>
           <p className="text-[#B0B0B0] mb-4">{error}</p>
-          <button 
+          <button
             onClick={() => window.location.reload()}
             className="bg-[#D32F2F] text-white px-6 py-3 rounded-lg hover:bg-[#B71C1C] transition-colors"
           >
@@ -178,37 +176,40 @@ const RealEstatePage = () => {
         </motion.div>
 
         {/* Properties Grid */}
+        {/* Properties Grid */}
         {properties.length > 0 ? (
           <>
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 lg:gap-8 mb-16">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 lg:gap-10 mb-16">
               {properties.map((property, index) => (
                 <div key={property.id} className="cursor-pointer">
                   <Link href={`/real-estate/${property.documentId}`}>
-                    <div className="bg-white">
-                      {/* Image Container */}
-                      <div className="relative aspect-[4/3] mb-4 bg-gray-100">
+                    <div className="bg-white group">
+                      {/* Perfect Square Image Container */}
+                      <div className="relative aspect-square mb-6 bg-gray-100 rounded-xl overflow-hidden shadow-lg hover:shadow-xl transition-all duration-300">
                         <Image
-                          src={getImageUrl(property.hero_image)}
+                          src={getImageUrl(property.herosection?.[0]?.heroImages[0])}
                           alt={property.short_description || 'Property'}
                           fill
-                          className="object-cover"
+                          className="object-cover group-hover:scale-105 transition-transform duration-500"
                         />
+                        {/* Optional overlay for better text readability */}
+                        <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
                       </div>
-                      
+
                       {/* Property Title */}
-                      <div className="text-left">
-                        <h3 className="text-base font-normal text-[#2E2E2E] leading-relaxed mb-1">
-                          {property.short_description || 'Luxury Property'}
+                      <div className="text-left px-2">
+                        <h3 className="text-lg font-medium text-[#2E2E2E] leading-relaxed mb-2 group-hover:text-[#D32F2F] transition-colors duration-300">
+                          {property.herosection?.[0]?.title || 'Luxury Property'}
                         </h3>
-                        <p className="text-sm text-[#666666]">
-                          {property.below_icon_text || 'Premium Location'}
+                        <p className="text-sm text-[#666666] line-clamp-2">
+                          {property.herosection?.[0]?.description || 'Premium Location'}
                         </p>
                       </div>
                     </div>
                   </Link>
                 </div>
-                             ))}
-             </div>
+              ))}
+            </div>
 
             {/* Pagination */}
             {totalPages > 1 && (
@@ -222,11 +223,10 @@ const RealEstatePage = () => {
                 <button
                   onClick={() => handlePageChange(currentPage - 1)}
                   disabled={currentPage === 1}
-                  className={`flex items-center px-6 py-3 rounded-lg transition-all duration-300 ${
-                    currentPage === 1
+                  className={`flex items-center px-6 py-3 rounded-lg transition-all duration-300 ${currentPage === 1
                       ? 'bg-gray-100 text-gray-400 cursor-not-allowed'
                       : 'bg-white text-[#2E2E2E] hover:bg-[#D32F2F] hover:text-white shadow-md hover:shadow-lg'
-                  }`}
+                    }`}
                 >
                   <svg className="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
@@ -243,11 +243,10 @@ const RealEstatePage = () => {
                 <button
                   onClick={() => handlePageChange(currentPage + 1)}
                   disabled={currentPage === totalPages}
-                  className={`flex items-center px-6 py-3 rounded-lg transition-all duration-300 ${
-                    currentPage === totalPages
+                  className={`flex items-center px-6 py-3 rounded-lg transition-all duration-300 ${currentPage === totalPages
                       ? 'bg-gray-100 text-gray-400 cursor-not-allowed'
                       : 'bg-white text-[#2E2E2E] hover:bg-[#D32F2F] hover:text-white shadow-md hover:shadow-lg'
-                  }`}
+                    }`}
                 >
                   Next
                   <svg className="w-5 h-5 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">

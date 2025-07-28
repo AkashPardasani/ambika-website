@@ -1,7 +1,10 @@
-"use client"
+"use client";
 import React from 'react';
 import { Play, Film, Users, Mail, MapPin, Star, ArrowRight } from 'lucide-react';
+
 import YouTube from 'react-youtube';
+import Image from 'next/image';
+
 const EntertainmentPage = () => {
   return (
     <div className="min-h-screen bg-gradient-to-br from-gray-50 to-gray-100">
@@ -18,7 +21,7 @@ const EntertainmentPage = () => {
             </p>
             <div className="w-16 sm:w-20 md:w-24 h-1 bg-yellow-400 mx-auto mb-6 md:mb-8"></div>
             <p className="text-base sm:text-lg md:text-xl max-w-4xl mx-auto leading-relaxed px-4 sm:px-0">
-              At Ambika, storytelling isn't just a venture—it's a calling. Through our banner Lakshya Productions, 
+              At Ambika, storytelling isn't just a venture—it's a calling. Through our banner Lakshya Productions,
               we entered the world of film and digital content not to chase trends, but to create something real, raw, and resonant.
             </p>
           </div>
@@ -39,37 +42,52 @@ const EntertainmentPage = () => {
                 We believe stories have the power to heal, provoke thought, spark change—and above all, to connect.
               </p>
               <p className="text-gray-600 leading-relaxed mb-6">
-                Our journey began with <strong className="text-red-600">"The Dark Side of Life: Mumbai City"</strong> (2019), 
-                a hard-hitting feature film starring Kay Kay Menon and Mahesh Bhatt. A story about urban loneliness and inner battles, 
+                Our journey began with <strong className="text-red-600">"The Dark Side of Life: Mumbai City"</strong> (2019),
+                a hard-hitting feature film starring Kay Kay Menon and Mahesh Bhatt. A story about urban loneliness and inner battles,
                 the film was our first attempt at holding up a mirror to modern society.
               </p>
               <p className="text-gray-600 leading-relaxed">
-                Today, we are proud to be building on that foundation with <strong className="text-red-600">"Anarchy"</strong>—a gritty, 
-                powerful, 9-episode political thriller featuring legends like Piyush Mishra and Tigmanshu Dhulia. 
+                Today, we are proud to be building on that foundation with <strong className="text-red-600">"Anarchy"</strong>—a gritty,
+                powerful, 9-episode political thriller featuring legends like Piyush Mishra and Tigmanshu Dhulia.
                 Currently in post-production, <em>Anarchy</em> is our statement to the industry: bold, independent storytelling still has a place.
               </p>
             </div>
             <div className="relative">
-              <div className="bg-gradient-to-br from-red-100 to-yellow-100 rounded-3xl p-8 shadow-xl">
-                <div className="bg-white rounded-2xl p-6 shadow-lg">
-                  <Film className="w-12 h-12 text-red-600 mb-4" />
-                  <h3 className="text-xl font-bold text-gray-800 mb-3">Featured Projects</h3>
-                  <div className="space-y-3">
-                    <div className="flex items-center gap-3">
-                      <Star className="w-5 h-5 text-yellow-500" />
-                      <span className="text-gray-700">The Dark Side of Life: Mumbai City (2019)</span>
+              <div className="relative rounded-3xl overflow-hidden shadow-xl">
+                <Image
+                  src="/entertainmentImg/Entertainment.jpeg"
+                  alt="Entertainment production scene"
+                  width={600}
+                  height={400}
+                  className="w-full h-auto object-cover"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
+                <div className="absolute bottom-6 left-6 right-6">
+                  {/* <div className="bg-transparent rounded-2xl p-6 shadow-lg">
+                    <Film className="w-12 h-12 text-red-600 mb-4" />
+                    <h3 className="text-xl font-bold text-white mb-3">Featured Projects</h3>
+                    <div className="space-y-3">
+                      <div className="flex items-center gap-3">
+                        <Star className="w-5 h-5 text-yellow-500" />
+                        <span className="text-white">The Dark Side of Life: Mumbai City (2019)</span>
+                      </div>
+                      <div className="flex items-center gap-3">
+                        <Play className="w-5 h-5 text-red-600" />
+                        <span className="text-white">Anarchy (In Post-Production)</span>
+                      </div>
                     </div>
-                    <div className="flex items-center gap-3">
-                      <Play className="w-5 h-5 text-red-600" />
-                      <span className="text-gray-700">Anarchy (In Post-Production)</span>
-                    </div>
-                  </div>
+                  </div> */}
                 </div>
               </div>
             </div>
           </div>
         </div>
+        <div>
+          <h1 className='text-2xl sm:text-3xl md:text-4xl font-bold text-gray-800 mb-4 md:mb-6 text-center'>Featured Projects</h1>
 
+          <h1 className='text-xl sm:text-2xl md:text-3xl font-bold text-gray-800  mb-8 text-center'>Anarchy (In Post-Production)</h1>
+        </div>
+                
         {/* YouTube Video Section */}
         <div className="mb-20">
           <div className="relative w-full" style={{ paddingBottom: '56.25%' /* 16:9 aspect ratio */ }}>
@@ -90,17 +108,36 @@ const EntertainmentPage = () => {
             </div>
           </div>
         </div>
+        
 
         {/* Philosophy Section */}
         <div className="mb-20">
           <div className="text-center mb-12">
-            <h2 className="text-3xl md:text-4xl font-bold text-gray-800 mb-4">
+            <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-gray-800 mb-4">
               Our Philosophy
             </h2>
-            <p className="text-lg text-gray-600 max-w-2xl mx-auto">
+            <p className="text-base sm:text-lg text-gray-600 max-w-2xl mx-auto px-4 sm:px-0">
               But for us, it's not about big budgets or glamour—it's about truth, craft, and courage.
             </p>
           </div>
+
+          {/* Philosophy Image */}
+          <div className="mb-12 relative rounded-3xl overflow-hidden shadow-xl">
+            <Image
+              src="/entertainmentImg/Entertainment2.jpg"
+              alt="Behind the scenes entertainment production"
+              width={1200}
+              height={400}
+              className="w-full h-64 md:h-80 object-cover"
+            />
+            <div className="absolute inset-0 bg-black/40 flex items-center justify-center">
+              <div className="text-center text-white">
+                <h3 className="text-2xl md:text-3xl font-bold mb-2">Crafting Stories That Matter</h3>
+                <p className="text-lg opacity-90">Truth, Craft, and Courage in Every Frame</p>
+              </div>
+            </div>
+          </div>
+
           <div className="grid md:grid-cols-3 gap-8">
             <div className="bg-white rounded-2xl p-8 shadow-lg hover:shadow-xl transition-shadow duration-300">
               <div className="w-16 h-16 bg-red-100 rounded-full flex items-center justify-center mb-6">
@@ -128,21 +165,33 @@ const EntertainmentPage = () => {
 
         {/* Vision Section */}
         <div className="mb-20">
-          <div className="bg-gradient-to-r from-gray-800 to-gray-900 rounded-3xl p-8 md:p-12 text-white">
-            <div className="max-w-4xl mx-auto text-center">
-              <h2 className="text-3xl md:text-4xl font-bold mb-6">Our Vision</h2>
-              <p className="text-lg leading-relaxed mb-8">
-                We're building a slate of <strong className="text-yellow-400">original films, series, and digital content</strong> that 
-                speak to the evolving Indian audience—smart, sensitive, and hungry for authenticity.
-              </p>
-              <p className="text-lg leading-relaxed mb-8">
-                Our goal is to bring forward <strong className="text-yellow-400">regional, rooted, and rebellious</strong> voices—because 
-                India's true stories don't always come from boardrooms or cities. Sometimes, they come from forgotten towns, 
-                fractured hearts, and fearless minds.
-              </p>
-              <div className="inline-flex items-center gap-2 bg-red-600 hover:bg-red-700 transition-colors duration-300 px-6 py-3 rounded-full">
-                <span className="font-semibold">Discover Our Work</span>
-                <ArrowRight className="w-5 h-5" />
+          <div className="bg-gradient-to-r from-gray-800 to-gray-900 rounded-3xl overflow-hidden shadow-2xl">
+            <div className="grid lg:grid-cols-2">
+              <div className="p-8 md:p-12 text-white">
+                <h2 className="text-3xl md:text-4xl font-bold mb-6">Our Vision</h2>
+                <p className="text-lg leading-relaxed mb-8">
+                  We're building a slate of <strong className="text-yellow-400">original films, series, and digital content</strong> that
+                  speak to the evolving Indian audience—smart, sensitive, and hungry for authenticity.
+                </p>
+                <p className="text-lg leading-relaxed mb-8">
+                  Our goal is to bring forward <strong className="text-yellow-400">regional, rooted, and rebellious</strong> voices—because
+                  India's true stories don't always come from boardrooms or cities. Sometimes, they come from forgotten towns,
+                  fractured hearts, and fearless minds.
+                </p>
+                {/* <div className="inline-flex items-center gap-2 bg-red-600 hover:bg-red-700 transition-colors duration-300 px-6 py-3 rounded-full">
+                  <span className="font-semibold">Discover Our Work</span>
+                  <ArrowRight className="w-5 h-5" />
+                </div> */}
+              </div>
+              <div className="relative">
+                <Image
+                  src="/entertainmentImg/Entertainment3.jpg"
+                  alt="Creative entertainment workspace"
+                  width={600}
+                  height={400}
+                  className="w-full h-full object-cover"
+                />
+                <div className="absolute inset-0 bg-gradient-to-l from-transparent to-gray-900/60"></div>
               </div>
             </div>
           </div>
@@ -159,7 +208,7 @@ const EntertainmentPage = () => {
               <strong className="text-red-600"> we want to hear from you</strong>. Reach out. Let's make something unforgettable.
             </p>
             <div className="flex flex-col sm:flex-row gap-6 justify-center items-center">
-              <a 
+              <a
                 href="mailto:production@houseofambika.com"
                 className="inline-flex items-center gap-3 bg-red-600 hover:bg-red-700 text-white px-8 py-4 rounded-full transition-colors duration-300 shadow-lg hover:shadow-xl"
               >

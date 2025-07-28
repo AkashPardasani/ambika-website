@@ -2,19 +2,24 @@ import React from 'react';
 import Link from 'next/link';
 
 const footerLinks = [
-  { name: 'Home', href: '/' },
-  { name: 'About Us', href: '/about' },
+  // { name: 'Home', href: '/' },
+  // { name: 'About Us', href: '/about' },
   { name: 'Real Estate', href: '/real-estate' },
   { name: 'Entertainment', href: '/entertainment' },
   { name: 'Finance', href: '/finance' },
   { name: 'Retail', href: '/retail' },
-  { name: 'Social Responsibility', href: '/social-responsibility' },
-  { name: 'Contact Us', href: '#' },
+  // { name: 'Social Responsibility', href: '/social-responsibility' },
+  // { name: 'Contact Us', href: '/contact' },
 ];
+const restLinks = [
+  { name: 'Home', href: '/' },
+  { name: 'contact', href: '/contact' },
+  { name: 'Social Responsiblity', href: '/social-responsibility' },
+]
 
 const aboutAnchors = [
   { name: 'Our History', href: '/about#history' },
-  { name: ",From the Managing Director's Desk", href: '/about#director' },
+  { name: "From the Managing Director's Desk", href: '/about#director' },
   { name: 'Our Vision', href: '/about#vision' },
 ];
 
@@ -62,7 +67,7 @@ export default function Footer() {
           {/* Main Links */}
           <div>
             <h3 className="text-sm font-semibold text-gray-900 tracking-wider uppercase mb-4">
-              Pages
+              Businesses
             </h3>
             <ul className="space-y-3">
               {footerLinks.map((link) => (
@@ -96,27 +101,26 @@ export default function Footer() {
               ))}
             </ul>
           </div>
-
-          {/* Newsletter */}
+          {/* Rest pages section */}
           <div>
-            <h3 className="text-lg font-semibold text-gray-900 mb-2">
-              Stay Updated
-            </h3>
-            <p className="text-sm text-gray-600 mb-4">
-              Get the latest news and updates on our projects and initiatives.
-            </p>
-            <div className="flex flex-col sm:flex-row gap-3">
-              <input
-                type="email"
-                placeholder="Enter your email"
-                className="flex-1 px-4 py-3 bg-white border border-gray-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-              />
-              <button
-                className="px-6 py-3 bg-blue-600 text-white text-sm font-medium rounded-lg hover:bg-blue-700 transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"
-              >
-                Subscribe
-              </button>
-            </div>
+            {/* <h3 className="text-sm font-semibold text-gray-900 tracking-wider uppercase mb-4">
+              Rest pages
+            </h3> */}
+            <ul className="space-y-3">
+              {restLinks.map((links) =>
+              (
+                <li key={links.name}>
+                  <Link
+                    href={links.href}
+                    className='text-sm text-gray-600 hover:text-gray-900 transition-colors duration-200'
+                  >
+                    {links.name}
+                  </Link>
+                </li>
+              )
+              )}
+
+            </ul>
           </div>
         </div>
 
@@ -126,7 +130,7 @@ export default function Footer() {
             <div className="text-sm text-gray-600">
               © 2025 House of Ambika. All rights reserved.
             </div>
-            <div className="flex flex-wrap justify-center gap-6">
+            {/* <div className="flex flex-wrap justify-center gap-6">
               <a href="#" className="text-sm text-gray-600 hover:text-gray-900 transition-colors duration-200">
                 Privacy Policy
               </a>
@@ -136,7 +140,7 @@ export default function Footer() {
               <a href="#" className="text-sm text-gray-600 hover:text-gray-900 transition-colors duration-200">
                 Sitemap
               </a>
-            </div>
+            </div> */}
           </div>
         </div>
       </div>

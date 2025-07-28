@@ -9,7 +9,7 @@ const BusinessShowcase = () => {
       title: 'REAL ESTATE',
       heading: 'Real Estate Excellence',
       description: 'Discover premium real estate opportunities with our comprehensive portfolio of residential and commercial properties. We specialize in luxury developments, strategic investments, and innovative architectural solutions that redefine modern living. Our commitment to quality, sustainability, and customer satisfaction has established us as a trusted name in the real estate industry. From sprawling residential complexes to cutting-edge commercial spaces, we create environments that inspire and endure.',
-      backgroundImage: 'https://images.unsplash.com/photo-1560518883-ce09059eeffa?q=80&w=2070',
+      backgroundImage: '/businessSectionImg/RealEstate.jpeg',
       readMoreLink: '/real-estate'
     },
     {
@@ -17,7 +17,7 @@ const BusinessShowcase = () => {
       title: 'ENTERTAINMENT',
       heading: 'Entertainment & Media',
       description: 'Immerse yourself in a world of captivating entertainment experiences. Our entertainment division creates and distributes premium content across multiple platforms, from blockbuster productions to engaging digital experiences. We are at the forefront of the entertainment revolution, leveraging cutting-edge technology to deliver unforgettable experiences. Our state-of-the-art facilities and creative partnerships ensure we bring world-class entertainment to audiences everywhere.',
-      backgroundImage: 'https://images.unsplash.com/photo-1489599511686-c2d7b3b5c4a5?q=80&w=2070',
+      backgroundImage: '/businessSectionImg/Entertainment.jpeg',
       readMoreLink: '/entertainment'
     },
     {
@@ -25,7 +25,7 @@ const BusinessShowcase = () => {
       title: 'FINANCE',
       heading: 'Financial Services',
       description: 'Empowering your financial future with comprehensive banking and investment solutions. Our finance division offers a complete suite of services including personal banking, corporate finance, investment management, and wealth advisory services. We combine traditional banking expertise with innovative fintech solutions to provide seamless, secure, and personalized financial experiences. Our commitment to financial inclusion and digital transformation makes banking accessible to everyone.',
-      backgroundImage: 'https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3?q=80&w=2070',
+      backgroundImage: '/businessSectionImg/FInance.jpeg',
       readMoreLink: '/finance'
     },
     {
@@ -33,7 +33,7 @@ const BusinessShowcase = () => {
       title: 'RETAIL',
       heading: 'Retail Revolution',
       description: 'Transforming the retail landscape with innovative shopping experiences and premium products. Our retail network spans across multiple categories, offering everything from fashion and electronics to home essentials and groceries. We are committed to providing quality products at competitive prices while supporting local manufacturers and sustainable practices. Our omnichannel approach ensures customers enjoy seamless shopping experiences across physical stores and digital platforms.',
-      backgroundImage: 'https://images.unsplash.com/photo-1472851294608-062f824d29cc?q=80&w=2070',
+      backgroundImage: '/businessSectionImg/Retail.jpeg',
       readMoreLink: '/retail'
     }
   ];
@@ -46,7 +46,7 @@ const BusinessShowcase = () => {
   const currentData = businessData[displayIndex];
 
   return (
-    <div className="relative w-full min-h-[600px] overflow-hidden">
+    <div className="relative w-full min-h-[800px] overflow-hidden">
       {/* Background Images */}
       {businessData.map((item, index) => (
         <div
