@@ -30,7 +30,7 @@ const nextConfig = {
         headers: [
           {
             key: "Access-Control-Allow-Origin",
-            value: "https://www.houseofambika.com, https://houseofambika.com"
+            value: "*"
           },
           {
             key: "Access-Control-Allow-Methods",
