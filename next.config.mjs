@@ -22,6 +22,32 @@ const nextConfig = {
       },
     ],
   },
+  async headers() {
+    return [
+      {
+        // Apply CORS headers to all API routes
+        source: "/api/:path*",
+        headers: [
+          {
+            key: "Access-Control-Allow-Origin",
+            value: "https://www.houseofambika.com, https://houseofambika.com"
+          },
+          {
+            key: "Access-Control-Allow-Methods",
+            value: "GET, POST, PUT, DELETE, OPTIONS"
+          },
+          {
+            key: "Access-Control-Allow-Headers",
+            value: "Content-Type, Authorization, X-Requested-With"
+          },
+          {
+            key: "Access-Control-Allow-Credentials",
+            value: "true"
+          }
+        ]
+      }
+    ];
+  }
 };
 
 export default nextConfig;
