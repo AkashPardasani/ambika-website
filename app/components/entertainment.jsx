@@ -1,11 +1,13 @@
 "use client";
 import React from 'react';
-import { Play, Film, Users, Mail, MapPin, Star, ArrowRight } from 'lucide-react';
+import {  Film, Users, Mail, MapPin, Star, ArrowRight } from 'lucide-react';
 
 import YouTube from 'react-youtube';
 import Image from 'next/image';
+import { useRouter } from 'next/navigation';
 
 const EntertainmentPage = () => {
+  const router = useRouter();
   return (
     <div className="min-h-screen bg-gradient-to-br from-gray-50 to-gray-100">
       {/* Hero Section */}
@@ -233,7 +235,9 @@ const EntertainmentPage = () => {
           <p className="text-lg opacity-90 mb-8">
             Join us in creating content that matters, stories that resonate, and cinema that changes perspectives.
           </p>
-          <button className="bg-white text-red-600 hover:bg-gray-100 px-8 py-4 rounded-full font-semibold transition-colors duration-300 shadow-lg hover:shadow-xl">
+          <button className="bg-white cursor-pointer text-red-600 hover:bg-gray-100 px-8 py-4 rounded-full font-semibold transition-colors duration-300 shadow-lg hover:shadow-xl" 
+          onClick={()=>router.push('/contact')}
+          >
             Get In Touch
           </button>
         </div>

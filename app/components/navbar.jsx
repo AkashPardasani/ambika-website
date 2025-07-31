@@ -472,30 +472,11 @@ const Navbar = () => {
               </Link>
             </div>
 
-            {/* Desktop Search Icon */}
+            {/* Desktop Search Icon - Invisible Placeholder */}
             <div className="hidden lg:flex items-center">
-              <button
-                className={`p-2 rounded-full transition-colors duration-200 ${
-                  isScrolled 
-                    ? 'text-black hover:bg-gray-100' 
-                    : 'text-white hover:bg-white/10'
-                }`}
-                aria-label="Search"
-              >
-                <svg
-                  className="h-5 w-5"
-                  fill="none"
-                  stroke="currentColor"
-                  viewBox="0 0 24 24"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth={2}
-                    d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
-                  />
-                </svg>
-              </button>
+              <div className="w-9 h-9" aria-hidden="true">
+                {/* This empty div maintains the same space as the search button */}
+              </div>
             </div>
 
             {/* Mobile Hamburger Menu */}
@@ -708,8 +689,8 @@ const Navbar = () => {
                     Contact Us
                   </Link>
 
-                  {/* Mobile Search */}
-                  <div className="pt-4 border-t border-gray-700">
+                  {/* Mobile Search - Also commented out for consistency */}
+                  {/* <div className="pt-4 border-t border-gray-700">
                     <button className="flex items-center text-white text-xl font-medium hover:text-gray-300 transition-colors duration-200 py-2">
                       <svg
                         className="h-5 w-5 mr-2"
@@ -726,7 +707,7 @@ const Navbar = () => {
                       </svg>
                       Search
                     </button>
-                  </div>
+                  </div> */}
                 </div>
               </motion.div>
             </div>

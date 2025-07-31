@@ -427,7 +427,7 @@ const renderPoints = (pointsArray, isLocation = false) => {
         )}
 
         {/* Gallery Section */}
-        {property.herosection?.flatMap(h => h.heroImages || []).filter(Boolean).length > 0 && (
+        {property.ameneties?.flatMap(a => a.gallery || []).length > 0 && (
           <section className="mb-20 lg:mb-32">
             <motion.h2
               initial={{ opacity: 0, y: 30 }}
@@ -438,7 +438,7 @@ const renderPoints = (pointsArray, isLocation = false) => {
               Gallery
             </motion.h2>
             <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 lg:gap-6">
-              {property.herosection.flatMap(h => h.heroImages || []).filter(Boolean).map((img, index) => (
+              {property.ameneties.flatMap(a => a.gallery || []).map((img, index) => (
                 <motion.div
                   key={index}
                   className="relative aspect-square overflow-hidden cursor-pointer group"
@@ -496,45 +496,54 @@ const renderPoints = (pointsArray, isLocation = false) => {
           </motion.div>
         </section>
         </main>
-        
-        <div className='px-4 sm:px-6 lg:px-8'>  
-        {(property.location || (property.location?.highlights_list && property.location?.highlights_list.length > 0)) && (
-          <section className="mb-20">
-            <motion.h2
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8 }}
-              className="text-4xl lg:text-5xl font-light text-center text-[#2E2E2E] mb-16 tracking-wide"
-            >
-              Location Advantages
-            </motion.h2>
-            <motion.div
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, delay: 0.2 }}
-              className="bg-gradient-to-br from-[#C4A77D]/10 to-[#D32F2F]/5  lg:p-16 p-40"
-            >
-              <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-start">
-                <motion.div
-                  initial={{ opacity: 0, x: -40 }}
-                  whileInView={{ opacity: 1, x: 0 }}
-                  transition={{ duration: 0.8, delay: 0.4 }}
-                >
-                  {renderIntro(property.location ? [{ title: property.location.title, description: property.location.description, iframe: property.location.map_embed_url }] : [])}
-                </motion.div>
-                <motion.div
-                  initial={{ opacity: 0, x: 40 }}
-                  whileInView={{ opacity: 1, x: 0 }}
-                  transition={{ duration: 0.8, delay: 0.6 }}
-                >
-                  {renderPoints(property.location ? [{ points: property.location.list || [] }] : [], true)}
-                </motion.div>
-              </div>
-            </motion.div>
-          </section>
-        )}
-        </div>
 
+        {/* Location Section */}
+        <div className=''>  
+  {(property.location || (property.location?.highlights_list && property.location?.highlights_list.length > 0)) && (
+    <section className="mb-12 sm:mb-16 md:mb-20">
+      <motion.h2
+        initial={{ opacity: 0, y: 30 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.8 }}
+        className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-light text-center text-[#2E2E2E] mb-8 sm:mb-12 md:mb-16 tracking-wide px-4"
+      >
+        Location Advantages
+      </motion.h2>
+      <motion.div
+        initial={{ opacity: 0, y: 30 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.8, delay: 0.2 }}
+        className="bg-gradient-to-br from-[#C4A77D]/10 to-[#D32F2F]/5 p-4 sm:p-6 md:p-8 lg:p-12 xl:p-16 mx-4 sm:mx-6 md:mx-8 lg:mx-0 rounded-lg sm:rounded-xl"
+      >
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 sm:gap-8 md:gap-12 lg:gap-16 xl:gap-20 items-start max-w-7xl mx-auto">
+          <motion.div
+            initial={{ opacity: 0, x: -40 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.8, delay: 0.4 }}
+            className="order-2 lg:order-1"
+          >
+            {renderIntro(property.location ? [{ 
+              title: property.location.title, 
+              description: property.location.description, 
+              iframe: property.location.map_embed_url 
+            }] : [])}
+          </motion.div>
+          <motion.div
+            initial={{ opacity: 0, x: 40 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.8, delay: 0.6 }}
+            className="order-1 lg:order-2"
+          >
+            {renderPoints(property.location ? [{ 
+              points: property.location.list || [] 
+            }] : [], true)}
+          </motion.div>
+        </div>
+      </motion.div>
+    </section>
+  )}
+</div>
+        {/* Creating the World's Finest Section */}
         <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 lg:py-24">
           <section className="mb-20 lg:mb-32">
           <motion.div
@@ -626,12 +635,6 @@ const renderPoints = (pointsArray, isLocation = false) => {
           </div>
         </section>
         </main>
-        {/* Location Section */}
-        
-        {/* Creating the World's Finest Section */}
-        
-
-      
 
     </div>
   );

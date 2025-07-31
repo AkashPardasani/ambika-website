@@ -12,19 +12,67 @@ const ContactPage = () => {
   });
   const [loading, setLoading] = useState(false);
   const [message, setMessage] = useState({ type: '', text: '' });
+  const [errors, setErrors] = useState({});
 
   const handleChange = (e) => {
     setFormData({
       ...formData,
       [e.target.name]: e.target.value
     });
+    // Clear error for the field on change
+    setErrors(prev => ({ ...prev, [e.target.name]: '' }));
   };
- 
+
+  const validateForm = () => {
+    const newErrors = {};
+    const nameTrimmed = formData.name.trim();
+    const phoneTrimmed = formData.phone.trim();
+    const emailTrimmed = formData.email.trim();
+    const queryTrimmed = formData.query.trim();
+
+    // Name validation
+    if (!nameTrimmed) {
+      newErrors.name = 'Name is required';
+    } else if (nameTrimmed.length < 2 || nameTrimmed.length > 100) {
+      newErrors.name = 'Name must be between 2 and 100 characters';
+    } else if (!/^[a-zA-Z\s]+$/.test(nameTrimmed)) {
+      newErrors.name = 'Name can only contain letters and spaces';
+    }
+
+    // Phone validation
+    if (!phoneTrimmed) {
+      newErrors.phone = 'Phone number is required';
+    } else if (!/^\+?[0-9\s\-]{7,15}$/.test(phoneTrimmed)) {
+      newErrors.phone = 'Please enter a valid phone number (7-15 digits, optional +, spaces, or -)';
+    }
+
+    // Email validation
+    if (!emailTrimmed) {
+      newErrors.email = 'Email is required';
+    } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(emailTrimmed)) {
+      newErrors.email = 'Please enter a valid email address';
+    }
+
+    // Query validation
+    if (!queryTrimmed) {
+      newErrors.query = 'Query is required';
+    } else if (queryTrimmed.length < 10 || queryTrimmed.length > 1000) {
+      newErrors.query = 'Query must be between 10 and 1000 characters';
+    }
+
+    setErrors(newErrors);
+    return Object.keys(newErrors).length === 0;
+  };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    setLoading(true);
     setMessage({ type: '', text: '' });
+
+    if (!validateForm()) {
+      return;
+    }
+
+    setLoading(true);
 
     try {
       const response = await axios.post('/api/contacts', formData);
@@ -32,19 +80,24 @@ const ContactPage = () => {
       if (response.status === 200) {
         setMessage({ type: 'success', text: 'Thank you for your message! We will get back to you soon.' });
         setFormData({ name: '', phone: '', email: '', query: '' });
+        setErrors({});
         const timeId = setTimeout(() => {
-          setMessage({type:'',message:''});
-          clearTimeout(timeId)
+          setMessage({type:'', text:''});
+          clearTimeout(timeId);
         }, 3000);
       }
     } catch (error) {
+      let errorText = 'Something went wrong. Please try again later.';
+      if (error.response?.data?.error) {
+        errorText = error.response.data.error;
+      }
       setMessage({ 
         type: 'error', 
-        text: 'Something went wrong. Please try again later.' 
+        text: errorText 
       });
       const timeId = setTimeout(() => {
         setMessage({ type: '', text: '' });
-        clearTimeout(timeId)
+        clearTimeout(timeId);
       }, 3000);
       
     } finally {
@@ -56,7 +109,8 @@ const ContactPage = () => {
   return (
     <div className="min-h-screen pt-20" style={{ backgroundColor: '#FFFAFA' }}>
       {/* Subtle gradient overlay for depth */}
-      <div className="absolute inset-0 bg-gradient-to-br from-transparent via-transparent to-black/20 pointer-events-none"></div>
+      {/* <div className="absolute inset-0 bg-gradient-to-br from-transparent via-transparent to-black/20 pointer-events-none">
+      </div> */}
       
       <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
         {/* Header Section */}
@@ -209,6 +263,7 @@ const ContactPage = () => {
                     }}
                     placeholder="Your full name"
                   />
+                  {errors.name && <p className="mt-1 text-sm text-red-600">{errors.name}</p>}
                 </div>
 
                 <div>
@@ -243,6 +298,7 @@ const ContactPage = () => {
                     }}
                     placeholder="Your phone number"
                   />
+                  {errors.phone && <p className="mt-1 text-sm text-red-600">{errors.phone}</p>}
                 </div>
 
                 <div>
@@ -277,6 +333,7 @@ const ContactPage = () => {
                     }}
                     placeholder="Your email address"
                   />
+                  {errors.email && <p className="mt-1 text-sm text-red-600">{errors.email}</p>}
                 </div>
 
                 <div>
@@ -311,6 +368,7 @@ const ContactPage = () => {
                     }}
                     placeholder="Tell us about your inquiry..."
                   />
+                  {errors.query && <p className="mt-1 text-sm text-red-600">{errors.query}</p>}
                 </div>
 
                 <button

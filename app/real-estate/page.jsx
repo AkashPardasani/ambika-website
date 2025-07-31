@@ -185,7 +185,7 @@ const RealEstatePage = () => {
                   <Link href={`/real-estate/${property.documentId}`}>
                     <div className="bg-white group">
                       {/* Perfect Square Image Container */}
-                      <div className="relative aspect-square mb-6 bg-gray-100 rounded-xl overflow-hidden shadow-lg hover:shadow-xl transition-all duration-300">
+                      <div className="relative aspect-square mb-6 bg-gray-100  overflow-hidden shadow-lg hover:shadow-xl transition-all duration-300">
                         <Image
                           src={getImageUrl(property.herosection?.[0]?.heroImages[0])}
                           alt={property.short_description || 'Property'}
@@ -199,10 +199,10 @@ const RealEstatePage = () => {
                       {/* Property Title */}
                       <div className="text-left px-2">
                         <h3 className="text-lg font-medium text-[#2E2E2E] leading-relaxed mb-2 group-hover:text-[#D32F2F] transition-colors duration-300">
-                          {property.herosection?.[0]?.title || 'Luxury Property'}
+                          {property.herosection?.[0]?.PropertyName || 'Luxury Property'}
                         </h3>
                         <p className="text-sm text-[#666666] line-clamp-2">
-                          {property.herosection?.[0]?.description || 'Premium Location'}
+                          {property.herosection?.[0]?.tagline || 'Premium Location'}
                         </p>
                       </div>
                     </div>

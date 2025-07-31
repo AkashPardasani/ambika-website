@@ -6,9 +6,12 @@ import { usePathname } from 'next/navigation';
 import { PinContainer } from "@/app/components/ui/3d-pin";
 import { AuroraBackground } from "@/app/components/ui/aurora-background";
 import { TextGenerateEffect } from "@/app/components/ui/text-generate-effect";
+import {useRouter} from "next/navigation";
+// import { useRouter } from "next/router";
 
 export default function AboutUsPage() {
   const pathname = usePathname();
+  const router = useRouter();
 
   // This useEffect handles scrolling when navigating to the page with a hash
   useEffect(() => {
@@ -266,7 +269,10 @@ export default function AboutUsPage() {
             <p className="text-xl mb-8 opacity-95 max-w-2xl mx-auto">
               Be a part of our story as we continue to build, grow, and create meaningful impact in people's lives.
             </p>
-            <button className="bg-yellow-400 hover:bg-yellow-300 text-gray-800 px-8 py-4 rounded-full font-semibold transition-all duration-300 shadow-lg hover:shadow-xl">
+            <button className="bg-yellow-400 hover:bg-yellow-300 text-gray-800 cursor-pointer px-8 py-4 rounded-full font-semibold transition-all duration-300 shadow-lg hover:shadow-xl"
+            onClick={()=>router.push('/contact')}
+            >
+              
               Connect With Us
             </button>
           </motion.div>
