@@ -490,7 +490,7 @@ const renderPoints = (pointsArray, isLocation = false) => {
             {/* Contact Sales Team Number */}
             <div className="mt-6">
               <p className="text-lg text-[#2E2E2E]">
-                Contact our sales team: <a href="tel:+919876543210" className="text-[#D32F2F] font-bold text-xl hover:underline">+91 98765 43210</a>
+                Contact our sales team: <a href="tel:+918770020241" className="text-[#D32F2F] font-bold text-xl hover:underline">+91 98765 43210</a>
               </p>
             </div>
           </motion.div>
