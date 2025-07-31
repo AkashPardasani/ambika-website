@@ -27,7 +27,7 @@ const PropertyDetailPage = () => {
     const fetchProperty = async () => {
       setLoading(true);
       try {
-        const response = await axios.get(`${process.env.NEXT_PUBLIC_STRAPI_URI}/api/properties/${params.id}`);
+        const response = await axios.get(`/api/properties/${params.id}`);
         const result = response.data;
         if (!result.data) {
           throw new Error("Property not found.");

@@ -19,7 +19,7 @@ const RealEstatePage = () => {
       setLoading(true);
       try {
         const res = await axios.get(
-          `${process.env.NEXT_PUBLIC_STRAPI_URI}/api/properties?pagination[page]=${currentPage}&pagination[pageSize]=${propertiesPerPage}`
+          `/api/properties?page=${currentPage}&pageSize=${propertiesPerPage}`
         );
         const data = res.data;
         console.log(data);
