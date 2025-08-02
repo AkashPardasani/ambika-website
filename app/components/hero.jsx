@@ -19,9 +19,8 @@ const HeroSection = () => {
 
         return () => clearInterval(interval);
     }, [images.length]);
-
     return (
-        <div className="relative w-full min-h-screen overflow-hidden">
+        <div className="relative w-full aspect-[4/3] sm:aspect-video overflow-hidden">
             {/* Image Carousel */}
             {images.map((image, index) => (
                 <div

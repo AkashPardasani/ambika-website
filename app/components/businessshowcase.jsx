@@ -46,7 +46,7 @@ const BusinessShowcase = () => {
   const currentData = businessData[displayIndex];
 
   return (
-    <div className="relative w-full min-h-[800px] overflow-hidden">
+    <div className="relative w-full min-h-[500px] sm:min-h-[600px] lg:min-h-[700px] overflow-hidden">
       {/* Background Images */}
       {businessData.map((item, index) => (
         <div
@@ -66,11 +66,11 @@ const BusinessShowcase = () => {
       ))}
 
       {/* Content Wrapper */}
-      <div className="relative z-10 h-full max-w-[1400px] mx-auto px-4 sm:px-8 py-8 sm:py-16 flex flex-col lg:flex-row">
+      <div className="relative z-10 h-full max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-8 py-6 sm:py-8 lg:py-12 flex flex-col lg:flex-row">
         {/* Left Column - Content */}
-        <div className="flex-1 flex flex-col justify-center pr-0 lg:pr-12 mb-8 lg:mb-0">
+        <div className="flex-1 flex flex-col justify-center pr-0 lg:pr-8 mb-6 lg:mb-0">
           {/* OUR BUSINESSES label */}
-          <div className="mb-6 sm:mb-8">
+          <div className="mb-4 sm:mb-6">
             <span className="text-white text-xs sm:text-sm font-medium flex items-center">
               <span className="inline-block w-6 sm:w-8 h-[1px] bg-white mr-2 sm:mr-3"></span>
               OUR BUSINESSES
@@ -79,11 +79,11 @@ const BusinessShowcase = () => {
 
           {/* Main Content */}
           <div className="transition-all duration-500 ease-in-out">
-            <h1 className="text-white text-3xl sm:text-4xl lg:text-6xl font-light mb-6 sm:mb-8 leading-tight">
+            <h1 className="text-white text-2xl sm:text-3xl lg:text-5xl font-light mb-4 sm:mb-6 leading-tight">
               {currentData.heading}
             </h1>
             
-            <p className="text-white/90 text-sm sm:text-base lg:text-lg leading-relaxed mb-6 sm:mb-8 max-w-2xl">
+            <p className="text-white/90 text-sm sm:text-base lg:text-lg leading-relaxed mb-4 sm:mb-6 max-w-xl">
               {currentData.description}
             </p>
 
@@ -105,7 +105,7 @@ const BusinessShowcase = () => {
         </div>
 
         {/* Right Column - Navigation */}
-        <div className="w-full lg:w-80 flex flex-row lg:flex-col justify-center gap-6 lg:gap-0">
+        <div className="w-full lg:w-80 flex flex-row lg:flex-col justify-center gap-4 sm:gap-6 lg:gap-0">
           <nav className="w-full space-y-4 lg:space-y-6 flex flex-row lg:flex-col gap-4 lg:gap-0">
             {businessData.map((item, index) => (
               <div

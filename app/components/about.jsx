@@ -6,9 +6,9 @@ import { usePathname } from 'next/navigation';
 import { PinContainer } from "@/app/components/ui/3d-pin";
 import { AuroraBackground } from "@/app/components/ui/aurora-background";
 import { TextGenerateEffect } from "@/app/components/ui/text-generate-effect";
-import {useRouter} from "next/navigation";
+import { useRouter } from "next/navigation";
 // import { useRouter } from "next/router";
-
+import Image from "next/image";
 export default function AboutUsPage() {
   const pathname = usePathname();
   const router = useRouter();
@@ -49,10 +49,10 @@ export default function AboutUsPage() {
   ];
 
   const ventures = [
-    { title: "Real Estate", description: "Building communities and dream homes.", link: "#" },
-    { title: "Finance", description: "Enabling dreams and supporting growth.", link: "#" },
-    { title: "Entertainment", description: "Telling stories that spark change.", link: "#" },
-    { title: "Retail", description: "Serving families with reliability and heart.", link: "#" },
+    { title: "Real Estate", description: "Building communities and dream homes.", link: "/real-estate/Aerial1.png" },
+    { title: "Finance", description: "Enabling dreams and supporting growth.", link: "/finance/Finance Page 1.jpeg" },
+    { title: "Entertainment", description: "Telling stories that spark change.", link: "/entertainmentImg/Entertainment.jpeg" },
+    { title: "Retail", description: "Serving families with reliability and heart.", link: "/businessSectionImg/Retail.jpeg" },
   ];
 
   return (
@@ -86,15 +86,15 @@ export default function AboutUsPage() {
             <div className="inline-flex items-center gap-2 bg-red-100 text-red-600 px-4 py-2 rounded-full text-sm font-medium mb-4">
               <span>Our Journey</span>
             </div>
-            <TextGenerateEffect 
-              words="Our History" 
-              className="text-center text-4xl md:text-5xl font-bold text-gray-800 mb-6" 
+            <TextGenerateEffect
+              words="Our History"
+              className="text-center text-4xl md:text-5xl font-bold text-gray-800 mb-6"
             />
             <p className="text-xl text-gray-600 max-w-3xl mx-auto">
               Every legacy has a humble beginning—and ours began with a small shop and a big dream.
             </p>
           </div>
-          
+
           <div className="relative">
             {/* Desktop Timeline */}
             <div className="hidden md:block absolute w-0.5 h-full bg-gray-300 left-1/2 transform -translate-x-1/2"></div>
@@ -115,17 +115,17 @@ export default function AboutUsPage() {
                     </div>
                   </div>
                   <div className="hidden md:flex md:w-1/2 justify-center items-center">
-                     <div className="z-10 bg-gradient-to-r from-red-600 to-red-700 text-white w-24 h-24 rounded-full flex items-center justify-center text-xl font-bold shadow-xl">
-                        {item.year}
-                     </div>
+                    <div className="z-10 bg-gradient-to-r from-red-600 to-red-700 text-white w-24 h-24 rounded-full flex items-center justify-center text-xl font-bold shadow-xl">
+                      {item.year}
+                    </div>
                   </div>
-                   {/* Mobile Year Badge */}
-                   <div className="md:hidden flex items-center mt-4">
-                        <div className="z-10 bg-gradient-to-r from-red-600 to-red-700 text-white w-16 h-16 rounded-full flex items-center justify-center text-lg font-bold shadow-xl">
-                           {item.year}
-                        </div>
-                        <div className="w-full h-0.5 bg-gray-300 ml-4"></div>
-                   </div>
+                  {/* Mobile Year Badge */}
+                  <div className="md:hidden flex items-center mt-4">
+                    <div className="z-10 bg-gradient-to-r from-red-600 to-red-700 text-white w-16 h-16 rounded-full flex items-center justify-center text-lg font-bold shadow-xl">
+                      {item.year}
+                    </div>
+                    <div className="w-full h-0.5 bg-gray-300 ml-4"></div>
+                  </div>
                 </motion.div>
               ))}
             </div>
@@ -156,17 +156,17 @@ export default function AboutUsPage() {
               <h3 className="text-xl font-bold text-white mb-2">Rajesh Pardasani</h3>
               <p className="text-yellow-400 font-medium">Managing Director</p>
             </div>
-            
+
             <blockquote className="text-lg italic text-gray-300 mb-6 leading-relaxed">
               "When I look back at our journey, it fills me with both gratitude and purpose. We began with nothing but a small shop, a determined heart, and a belief—that if we treated people right, they'd walk with us."
             </blockquote>
-            
+
             <div className="text-yellow-400 font-bold text-xl mb-2">And walk with us, you did.</div>
-            
+
             <p className="text-gray-300 leading-relaxed mb-6">
               From building homes that families now call their own, to creating spaces where stories come to life, and offering financial support to those chasing their dreams—we've always believed in being more than a business. We've believed in being a part of people's lives.
             </p>
-            
+
             <div className="pt-6 border-t border-white/20">
               <p className="text-white font-medium">With warmth,</p>
               <p className="text-yellow-400 font-bold">Rajesh Pardasani</p>
@@ -181,9 +181,9 @@ export default function AboutUsPage() {
           <div className="inline-flex items-center gap-2 bg-red-100 text-red-600 px-4 py-2 rounded-full text-sm font-medium mb-8">
             <span>Future Forward</span>
           </div>
-          <TextGenerateEffect 
-            words="Our Vision" 
-            className="text-center text-4xl md:text-5xl font-bold text-gray-800 mb-8" 
+          <TextGenerateEffect
+            words="Our Vision"
+            className="text-center text-4xl md:text-5xl font-bold text-gray-800 mb-8"
           />
           <motion.div
             initial={{ opacity: 0, scale: 0.9 }}
@@ -204,55 +204,63 @@ export default function AboutUsPage() {
         </div>
       </section>
 
-       {/* Ventures Section */}
-     <section className="py-16 sm:py-20 lg:py-24 bg-gray-900 text-white">
-  <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-    
-    {/* Section Header */}
-    <div className="text-center mb-12 sm:mb-16 lg:mb-20">
-      <div className="inline-flex items-center gap-2 bg-white/10 backdrop-blur-sm px-4 py-2 rounded-full text-sm font-medium mb-6 sm:mb-8">
-        <span>Our Portfolio</span>
-      </div>
-      <h2 className="text-4xl sm:text-5xl lg:text-6xl font-bold tracking-tight mb-4">
-        Our <span className="text-yellow-400">Ventures</span>
-      </h2>
-      <p className="text-lg sm:text-xl text-gray-400 max-w-3xl mx-auto">
-        A diverse portfolio of businesses united by a shared passion for innovation and excellence.
-      </p>
-    </div>
-    
-    {/* Responsive Grid Layout for Ventures */}
-    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-      {ventures.map((venture, index) => (
-        <motion.div
-          key={index}
-          initial={{ opacity: 0, y: 50 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: index * 0.15, ease: "easeOut" }}
-          viewport={{ once: true }}
-        >
-          {/* PinContainer for the 3D hover effect */}
-          <PinContainer title={venture.title} href={venture.link}>
-            <div className="flex flex-col w-full h-full p-4 sm:p-6 tracking-tight text-slate-100/90 min-h-[16rem] sm:min-h-[20rem] md:min-h-[22rem]">
-              {/* Venture Title */}
-              <h3 className="!pb-2 !m-0 font-bold text-lg sm:text-xl text-white">
-                {venture.title}
-              </h3>
-              {/* Venture Description */}
-              <div className="text-sm sm:text-base !m-0 !p-0 font-normal">
-                <span className="text-gray-300">
-                  {venture.description}
-                </span>
-              </div>
-              {/* Decorative Gradient Element */}
-              <div className="flex flex-1 w-full rounded-lg mt-4 bg-gradient-to-br from-yellow-400 via-orange-500 to-red-600" />
+      {/* Ventures Section */}
+      <section className="py-16 sm:py-20 lg:py-24 bg-gray-900 text-white">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+
+          {/* Section Header */}
+          <div className="text-center mb-12 sm:mb-16 lg:mb-20">
+            <div className="inline-flex items-center gap-2 bg-white/10 backdrop-blur-sm px-4 py-2 rounded-full text-sm font-medium mb-6 sm:mb-8">
+              <span>Our Portfolio</span>
             </div>
-          </PinContainer>
-        </motion.div>
-      ))}
-    </div>
-  </div>
-</section>
+            <h2 className="text-4xl sm:text-5xl lg:text-6xl font-bold tracking-tight mb-4">
+              Our <span className="text-yellow-400">Ventures</span>
+            </h2>
+            <p className="text-lg sm:text-xl text-gray-400 max-w-3xl mx-auto">
+              A diverse portfolio of businesses united by a shared passion for innovation and excellence.
+            </p>
+          </div>
+
+          {/* Responsive Grid Layout for Ventures */}
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+            {ventures.map((venture, index) => (
+              <motion.div
+                key={index}
+                initial={{ opacity: 0, y: 50 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6, delay: index * 0.15, ease: "easeOut" }}
+                viewport={{ once: true }}
+              >
+                {/* PinContainer for the 3D hover effect */}
+                <PinContainer title={venture.title} href={venture.link}>
+                  <div className="flex flex-col w-full h-full p-4 sm:p-6 tracking-tight text-slate-100/90 min-h-[16rem] sm:min-h-[20rem] md:min-h-[22rem]">
+                    {/* Venture Title */}
+                    <h3 className="!pb-2 !m-0 font-bold text-lg sm:text-xl text-white">
+                      {venture.title}
+                    </h3>
+                    {/* Venture Description */}
+                    <div className="text-sm sm:text-base !m-0 !p-0 font-normal">
+                      <span className="text-gray-300">
+                        {venture.description}
+                      </span>
+                    </div>
+                    {/* Decorative Gradient Element */}
+                    <div className="flex flex-1 w-full  items-center rounded-lg mt-4 overflow-hidden">
+                      <Image
+                        src={venture.link} // Add image property to your venture object
+                        alt={venture.title}
+                        width={400}
+                        height={400}
+                        className="w-full h-full object-cover rounded-lg"
+                      />
+                    </div>
+                  </div>
+                </PinContainer>
+              </motion.div>
+            ))}
+          </div>
+        </div>
+      </section>
 
       {/* CTA Section */}
       <section className="bg-gradient-to-r from-red-600 to-red-700 text-white py-20">
@@ -270,9 +278,9 @@ export default function AboutUsPage() {
               Be a part of our story as we continue to build, grow, and create meaningful impact in people's lives.
             </p>
             <button className="bg-yellow-400 hover:bg-yellow-300 text-gray-800 cursor-pointer px-8 py-4 rounded-full font-semibold transition-all duration-300 shadow-lg hover:shadow-xl"
-            onClick={()=>router.push('/contact')}
+              onClick={() => router.push('/contact')}
             >
-              
+
               Connect With Us
             </button>
           </motion.div>

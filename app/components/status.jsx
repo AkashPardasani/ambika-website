@@ -108,30 +108,30 @@ const StatsSection = () => {
   const stats = [
     {
       icon: Users,
-      number: 25000,
+      number: '1000',
       suffix: '+',
-      label: 'Happy Families',
+      label: 'Homes built',
       delay: 0
     },
     {
       icon: Building,
-      number: 150,
-      suffix: '+',
-      label: 'Properties Developed',
+      number: 2,
+      suffix: '',
+      label: 'Feature films and web-shows produced',
       delay: 200
     },
     {
       icon: Trophy,
-      number: 50,
-      suffix: '+',
-      label: 'Awards Won',
+      number: 25,
+      suffix: '',
+      label: 'years of retail trade excellence',
       delay: 400
     },
     {
       icon: Globe,
-      number: 12,
+      number: 100,
       suffix: '+',
-      label: 'Cities Served',
+      label: 'Projects financed',
       delay: 600
     }
   ];

@@ -545,7 +545,7 @@ const Navbar = () => {
               >
                 {/* Close Button */}
                 <div className="flex justify-end p-4">
-                  <button
+                  {/* <button
                     onClick={toggleMobileMenu}
                     className="text-white hover:text-gray-300 transition-colors duration-200 p-2"
                     aria-label="Close menu"
@@ -563,7 +563,7 @@ const Navbar = () => {
                         d="M6 18L18 6M6 6l12 12"
                       />
                     </svg>
-                  </button>
+                  </button> */}
                 </div>
 
                 {/* Mobile Navigation Links */}
